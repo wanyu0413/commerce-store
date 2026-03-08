@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e7cbcb",
+                        "background-light": "#f7f6f6",
+                        "background-dark": "#1d1515",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>DoxieStyle | Premium Checkout</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-primary/20 px-6 md:px-20 py-4 bg-background-light/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">pets</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl leading-tight tracking-tight font-bold">DoxieLuxury</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">Shop</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">Collections</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:block">
+<label class="relative block group">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary">search</span>
+</span>
+<input class="block w-full bg-primary/10 border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary placeholder:text-slate-400 text-sm" placeholder="Search collection..." type="text"/>
+</label>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/20 text-slate-900 dark:text-slate-100 hover:bg-primary transition-all"><span class="material-symbols-outlined text-[20px]">shopping_bag</span></button>
+<button class="flex items-center justify-center rounded-full size-10 bg-primary/20 text-slate-900 dark:text-slate-100 hover:bg-primary transition-all"><span class="material-symbols-outlined text-[20px]">person</span></button>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4 md:px-10">
+<div class="flex flex-col lg:flex-row max-w-6xl w-full gap-12">
+<!-- Left Side: Checkout Details -->
+<div class="flex-1 flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl font-extrabold tracking-tight">Finalize Order</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">You're just one step away from premium dachshund style.</p>
+</div>
+<!-- Shipping Section -->
+<section class="flex flex-col gap-6 bg-white dark:bg-slate-900/50 p-8 rounded-xl shadow-sm border border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold">Shipping Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-2 col-span-full">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Full Name</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="Oliver Barkley" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Email Address</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="hello@doxiestyle.com" type="email"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Phone Number</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="(555) 000-0000" type="tel"/>
+</label>
+<label class="flex flex-col gap-2 col-span-full">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Street Address</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="123 Dachshund Lane" type="text"/>
+</label>
+</div>
+</section>
+<!-- Payment Section -->
+<section class="flex flex-col gap-6 bg-white dark:bg-slate-900/50 p-8 rounded-xl shadow-sm border border-primary/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">payments</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold">Payment Method</h2>
+</div>
+<div class="flex flex-col gap-4">
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-4 border-2 border-primary rounded-lg bg-primary/5">
+<span class="material-symbols-outlined text-primary mb-1">credit_card</span>
+<span class="text-xs font-bold">Card</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-slate-400 mb-1">account_balance_wallet</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">PayPal</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-slate-400 mb-1">ios</span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400">Apple Pay</span>
+</button>
+</div>
+<label class="flex flex-col gap-2 mt-4">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Card Number</span>
+<div class="relative">
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4 pr-12" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">credit_card</span>
+</div>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">Expiry Date</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="MM/YY" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-slate-700 dark:text-slate-300 text-sm font-semibold">CVC</span>
+<input class="w-full rounded-lg border-primary/20 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary h-12 px-4" placeholder="123" type="text"/>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Side: Order Summary -->
+<div class="w-full lg:w-[400px]">
+<div class="sticky top-28 bg-white dark:bg-slate-900/50 p-8 rounded-xl shadow-lg border border-primary/20">
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold mb-6">Order Summary</h2>
+<div class="flex flex-col gap-6">
+<!-- Item 1 -->
+<div class="flex gap-4">
+<div class="w-20 h-20 rounded-lg bg-cover bg-center border border-primary/10" data-alt="Stylish pastel dachshund harness in soft pink" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGeYRoN4wOjbbClPlulhjwaniQKfcPPtAc_vCLfqw35zo7E_GJdsx1AfFDo-kthBrc2P1q-iAJF9tWZN3vUH_ol5WK3kI0Wpe0fU580YlMNh45hpBKnrbDUFKoSjL32IJlZyWqbt7V_rV15UDJOlWydfNZCzHjwczmXZcbpBDIK1CHJxOtQwmF6k9RxIXyX1WJb8rN-kRDxQzWjPtgNNhbjVXpWeVSCly3Cesav9yiIcZvUfd6vAzozfGsU-It1AZUdoUcfesdjbjF');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-slate-900 dark:text-slate-100 font-bold text-sm">Pastel Pink Harness</h4>
+<p class="text-slate-500 text-xs">Size: Medium</p>
+<p class="text-slate-900 dark:text-slate-100 font-bold mt-1">$45.00</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4">
+<div class="w-20 h-20 rounded-lg bg-cover bg-center border border-primary/10" data-alt="Elegant leather leash with brass hardware" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHAnsXw-1SVHDPpaHJchu2r3wglnVz9zs3PSf-0XaFAOOw7IjOpWgkIIoj7qeTDMHB5HHg8luV92PoUvK2ZrPOHZtoAdaYOU4Ekf6GX3cIq8e4-UWn8VolJREk7fJk2Z129d-rQd6fA5V-xzLzAd3OrH6ZeW4FCrUSRLAbKxkl_mDYwQY_auOCYODJxggy_Cs2ZrVKZZwi-6TzQAvSKFwZjkFalT-xFlFsFuWUR4pbiGYB4vLXinco_WERnF8N72D-niVD-CSaMrty');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-slate-900 dark:text-slate-100 font-bold text-sm">Signature Leather Leash</h4>
+<p class="text-slate-500 text-xs">Color: Toffee</p>
+<p class="text-slate-900 dark:text-slate-100 font-bold mt-1">$38.00</p>
+</div>
+</div>
+<hr class="border-primary/10 my-2"/>
+<!-- Calculation -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between text-slate-600 dark:text-slate-400 text-sm">
+<span>Subtotal</span>
+<span>$83.00</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400 text-sm">
+<span>Shipping</span>
+<span class="text-green-500 font-medium">Free</span>
+</div>
+<div class="flex justify-between text-slate-900 dark:text-slate-100 text-lg font-extrabold mt-2 pt-4 border-t border-primary/10">
+<span>Total</span>
+<span>$83.00</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/80 text-white font-bold py-4 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2">
+<span>Place Order</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-[10px] text-slate-400 mt-2 px-4 uppercase tracking-widest">
+                                Secure Encrypted Checkout
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Footer -->
+<footer class="mt-auto py-10 px-6 border-t border-primary/10 text-center">
+<p class="text-slate-400 text-sm font-medium">© 2024 DoxieStyle Premium Gear. All rights reserved.</p>
+</footer>
+</div>
+</div>
+</body></html>

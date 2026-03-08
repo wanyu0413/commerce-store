@@ -3,7 +3,16 @@
 @plugin "@tailwindcss/container-queries";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --color-primary: #e7cbcb;
+  --color-background-light: #f7f6f6;
+  --color-background-dark: #1d1515;
+  --font-display: "Epilogue", sans-serif;
+  --radius-xl: 3rem;
+}
+
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -29,4 +38,14 @@ a,
 input,
 button {
   @apply focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+}
+
+@layer components {
+  .btn-primary-lift {
+    @apply inline-block bg-[#EAC7C7] text-white px-8 py-4 rounded-full font-bold transition-all duration-300 ease-in-out hover:bg-[#EAC7C7]/80 hover:-translate-y-[6px] hover:shadow-lg;
+  }
+
+  .filter-btn {
+    @apply flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 border border-primary/20 shadow-sm hover:border-primary transition-all;
+  }
 }
