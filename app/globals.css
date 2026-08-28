@@ -50,7 +50,7 @@ button {
 
 @layer components {
   .btn-primary-lift {
-    @apply inline-block bg-(--color-midnight-ocean) text-white px-8 py-4 rounded-full font-bold transition-all duration-300 ease-in-out hover:bg-(--color-teal-mint) hover:translate-y-[6px] hover:shadow-lg;
+    @apply inline-block bg-(--color-campfire) text-white px-8 py-4 rounded-[71%_29%_69%_31%/44%_75%_25%_56%] font-bold transition-[background-color,box-shadow] duration-300 ease-in-out hover:bg-(--color-teal-mint) hover:shadow-lg;
   }
 
   .filter-btn {

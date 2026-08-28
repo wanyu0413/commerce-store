@@ -1,6 +1,7 @@
 "use client";
 
 import gsap from "gsap";
+import { cuteFont } from "lib/fonts";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 
@@ -10,8 +11,9 @@ export default function ShopButton() {
   const jumpTweenRef = useRef<gsap.core.Tween | null>(null);
 
   useLayoutEffect(() => {
-    // Start fully tucked away behind the button.
-    gsap.set(pawsRef.current, { xPercent: -50, yPercent: 100 });
+    // Start fully tucked away behind the button, and invisible so any
+    // mid-slide transit through the button's edge never flashes the root.
+    gsap.set(pawsRef.current, { xPercent: -50, yPercent: 100, opacity: 0 });
   }, []);
 
   const handleEnter = () => {
@@ -25,23 +27,24 @@ export default function ShopButton() {
 
     gsap
       .timeline()
-      .to(el, { scale: 1.06, y: -6, duration: 0.4, ease: "back.out(3)" }, 0)
+      .to(el, { scale: 1.06, y: 6, duration: 0.4, ease: "back.out(3)" }, 0)
       .fromTo(
         underline,
         { strokeDashoffset: 220 },
         { strokeDashoffset: 0, duration: 0.5, ease: "circ.inOut" },
         0,
       )
-      .to(paws, { yPercent: 0, duration: 0.5, ease: "back.out(2)" }, 0.05)
+      .to(paws, { yPercent: 0, y: -14, duration: 0.5, ease: "back.out(2)" }, 0.05)
+      .to(paws, { opacity: 1, duration: 0.2 }, 0.35)
       .call(() => {
         // A little hopping loop while the paws are up, for a cute/fun feel.
         jumpTweenRef.current = gsap.to(paws, {
-          y: -30,
-          duration: 0.32,
+          y: -40,
+          duration: 0.3,
           ease: "power1.out",
           yoyo: true,
           repeat: -1,
-          repeatDelay: 0.08,
+          repeatDelay: 0.1,
         });
       });
   };
@@ -55,9 +58,18 @@ export default function ShopButton() {
     jumpTweenRef.current?.kill();
     gsap.killTweensOf([el, paws, underline]);
 
-    gsap.to(el, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
-    gsap.to(underline, { strokeDashoffset: 220, duration: 0.3 });
-    gsap.to(paws, { yPercent: 100, y: 0, duration: 0.3, ease: "power2.in" });
+    gsap
+      .timeline()
+      .to(el, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0)
+      .to(underline, { strokeDashoffset: 220, duration: 0.3 }, 0)
+      // Fade out first, while still safely tucked in place, then slide back
+      // down only once invisible — same reasoning as the enter animation.
+      .to(paws, { opacity: 0, duration: 0.15 }, 0)
+      .to(
+        paws,
+        { yPercent: 100, y: 0, duration: 0.25, ease: "power2.in" },
+        0.12,
+      );
   };
 
   return (
@@ -73,12 +85,12 @@ export default function ShopButton() {
           ref={pawsRef}
           src="/dog-arms.png"
           alt=""
-          className="absolute bottom-0 left-1/2 w-40 max-w-none"
+          className="absolute bottom-0 left-1/2 w-30 max-w-none"
         />
       </div>
       <Link
         href="/search"
-        className="btn-primary-lift relative z-10 inline-block"
+        className={`${cuteFont.className} text-xl btn-primary-lift relative z-10 inline-block`}
       >
         Shop the Collection
         <svg

@@ -1,4 +1,6 @@
+import { cuteFont } from "lib/fonts";
 import ShopButton from './shop-button';
+
 
 export default function Hero() {
     return (
@@ -9,10 +11,10 @@ export default function Hero() {
             </div>
 
             <div className="relative z-10 text-center px-4 w-1/3">
-                <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg mb-4">
+                <h1 className={`${cuteFont.className} text-5xl md:text-7xl font-bold text-black drop-shadow-lg mb-4`}>
                     LONGLOAF🐾
                 </h1>
-                <p className="text-xl text-white drop-shadow-md mb-14 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600 drop-shadow-md mb-14 max-w-lg mx-auto">
                     Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.
                 </p>
                 <ShopButton />
