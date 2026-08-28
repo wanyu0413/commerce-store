@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import ShopButton from './shop-button';
 
 export default function Hero() {
     return (
@@ -12,15 +12,10 @@ export default function Hero() {
                 <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg mb-4">
                     LONGLOAF🐾
                 </h1>
-                <p className="text-xl text-white drop-shadow-md mb-8 max-w-lg mx-auto">
+                <p className="text-xl text-white drop-shadow-md mb-14 max-w-lg mx-auto">
                     Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.
                 </p>
-                <Link
-                    href="/search"
-                    className="btn-primary-lift"
-                >
-                    Shop the Collection
-                </Link>
+                <ShopButton />
             </div>
         </section>
     );
