@@ -10,7 +10,7 @@ export default function Hero() {
 
             <div className="relative z-10 text-center px-4 w-1/3">
                 <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg mb-4">
-                    Big City Style for Short Legs
+                    LONGLOAF🐾
                 </h1>
                 <p className="text-xl text-white drop-shadow-md mb-8 max-w-lg mx-auto">
                     Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.

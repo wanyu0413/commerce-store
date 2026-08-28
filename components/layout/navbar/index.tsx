@@ -2,6 +2,7 @@ import CartModal from "components/cart/modal";
 import LogoSquare from "components/logo-square";
 import { getMenu } from "lib/shopify";
 import { Menu } from "lib/shopify/types";
+import { cuteFont } from "lib/fonts";
 import Link from "next/link";
 import { Suspense } from "react";
 import MobileMenu from "./mobile-menu";
@@ -27,7 +28,9 @@ export async function Navbar() {
             className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
           >
             <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
+            <div
+              className={`${cuteFont.className} flex-none text-xl font-medium uppercase md:hidden lg:block`}
+            >
               {SITE_NAME}
             </div>
           </Link>
