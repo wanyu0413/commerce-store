@@ -25,7 +25,7 @@ export default function ShopButton() {
 
     gsap
       .timeline()
-      .to(el, { scale: 1.06, duration: 0.4, ease: "back.out(3)" }, 0)
+      .to(el, { scale: 1.06, y: -6, duration: 0.4, ease: "back.out(3)" }, 0)
       .fromTo(
         underline,
         { strokeDashoffset: 220 },
@@ -55,7 +55,7 @@ export default function ShopButton() {
     jumpTweenRef.current?.kill();
     gsap.killTweensOf([el, paws, underline]);
 
-    gsap.to(el, { scale: 1, duration: 0.3, ease: "power2.out" });
+    gsap.to(el, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
     gsap.to(underline, { strokeDashoffset: 220, duration: 0.3 });
     gsap.to(paws, { yPercent: 100, y: 0, duration: 0.3, ease: "power2.in" });
   };
@@ -90,7 +90,7 @@ export default function ShopButton() {
             className="squiggle"
             d="M2 8 Q 20 2, 38 8 T 74 8 T 110 8 T 146 8 T 182 8 T 218 8"
             fill="none"
-            stroke="#e5e51c"
+            stroke="var(--color-campfire)"
             strokeWidth="3"
             strokeLinecap="round"
             strokeDasharray="220"

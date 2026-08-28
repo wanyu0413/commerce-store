@@ -11,6 +11,14 @@
   --radius-xl: 3rem;
 }
 
+:root {
+  --color-dusty-pink: #c2a1ae;
+  --color-campfire: #ca6036;
+  --color-midnight-ocean: #1b2f52;
+  --color-teal-mint: #6db6d3;
+
+}
+
 @layer base {
 
   *,
@@ -42,7 +50,7 @@ button {
 
 @layer components {
   .btn-primary-lift {
-    @apply inline-block bg-[#EAC7C7] text-white px-8 py-4 rounded-full font-bold transition-all duration-300 ease-in-out hover:bg-[#EAC7C7] hover:-translate-y-[6px] hover:shadow-lg;
+    @apply inline-block bg-(--color-midnight-ocean) text-white px-8 py-4 rounded-full font-bold transition-all duration-300 ease-in-out hover:bg-(--color-teal-mint) hover:translate-y-[6px] hover:shadow-lg;
   }
 
   .filter-btn {
