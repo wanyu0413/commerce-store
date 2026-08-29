@@ -54,10 +54,10 @@ export default function ProductGridItems({
               </div>
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1">{product.title}</h3>
+                  <h3 className="text-lg font-bold text-(--color-neutral-gray-blue) mb-1">{product.title}</h3>
                   <StarRating rating={5.0} />
                 </div>
-                <p className="text-lg font-black text-primary tracking-tighter">{currency}{price.toFixed(2)}</p>
+                <p className="text-lg font-bold text-(--color-campfire) tracking-tighter">{currency}{price.toFixed(2)}</p>
               </div>
             </Link>
           </Grid.Item>

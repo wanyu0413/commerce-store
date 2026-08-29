@@ -8,7 +8,7 @@ export default function SearchLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+    <div className="bg-transparent">
       <main className="flex-1 max-w-[1200px] mx-auto w-full px-6 py-8">
         <nav className="flex items-center gap-2 mb-8 text-sm font-medium">
           <a className="text-slate-400 hover:text-primary transition-colors" href="/">Home</a>

@@ -33,7 +33,7 @@ export function Features() {
                 <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
                     <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
                         {features.map((feature) => (
-                            <div key={feature.name} className="flex flex-col items-center bg-white rounded-3xl p-10 shadow-sm border border-neutral-100/50 hover:shadow-md transition-shadow">
+                            <div key={feature.name} className="flex flex-col items-center bg-white/10 rounded-3xl p-10 shadow-sm border border-[var(--color-campfire)] hover:shadow-md transition-shadow">
                                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#faeff0]">
                                     <feature.icon className="h-8 w-8 text-[#dca6a3]" aria-hidden="true" />
                                 </div>

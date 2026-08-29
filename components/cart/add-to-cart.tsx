@@ -55,15 +55,14 @@ function DogMaskButton({
       aria-label={ariaLabel}
       disabled={disabled}
       {...handlers}
-      className={`relative inline-block aspect-[579/348] w-64 max-w-full ${disabled ? "cursor-not-allowed" : "hover:opacity-90"
-        }`}
+      className="relative w-full flex items-center justify-center gap-3 bg-neutral-800 text-neutral-400 py-[12px] px-[20px] rounded-[10px] font-bold cursor-not-allowed opacity-50"
     >
-      <DogMask url="/tail_faster-mask-still.webp" color={color} />
-      <span
-        className={`${cuteFont.className} relative z-10 flex h-full items-center justify-center text-xl font-bold tracking-wide text-white`}
-      >
+      <span className={`${cuteFont.className} text-[24px] uppercase tracking-wider`}>
         {label}
       </span>
+      <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">
+        <DogMask url="/tail_faster-mask-still.webp" color="currentColor" />
+      </div>
     </button>
   );
 }
@@ -119,14 +118,14 @@ function LiveSubmitButton() {
       aria-label="Add to cart"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-block aspect-[579/348] w-64 max-w-full scale-100 transition-transform duration-300 ease-out hover:scale-105"
+      className="btn-primary-lift relative w-full flex items-center justify-center gap-3 py-[12px] px-[20px] text-white hover:text-white"
     >
-      <DogMask url={maskUrl} color="rgba(0, 0, 0, 0.9)" />
-      <span
-        className={`${cuteFont.className} pt-2 relative z-10 flex h-full items-center justify-center text-[32px] font-bold tracking-wide text-(--color-dusty-pink) transition-transform duration-300`}
-      >
+      <span className={`${cuteFont.className} text-[24px] uppercase tracking-wider`}>
         Add To Cart
       </span>
+      <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">
+        <DogMask url={maskUrl} color={isHovered ? "var(--color-midnight-ocean)" : "var(--color-campfire)"} className="transition-colors duration-300 ease-in-out" />
+      </div>
     </button>
   );
 }
