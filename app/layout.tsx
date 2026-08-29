@@ -32,7 +32,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={sourceSans3.variable}>
-      <body className="bg-(--color-dusty-blue) text-white selection:bg-teal-300 selection:text-white" suppressHydrationWarning>
+      <body className="bg-(--color-midnight-ocean) text-white selection:bg-teal-300 selection:text-white" suppressHydrationWarning>
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>

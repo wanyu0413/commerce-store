@@ -12,11 +12,32 @@
   --radius-xl: 3rem;
 }
 
+body {
+  position: relative;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/Textures.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
 :root {
   --color-dusty-pink: #c2a1ae;
   --color-dusty-blue: #a1aec2;
-  --color-campfire: #b1522a;
-  --color-midnight-ocean: #1b2f52;
+  /* --color-campfire: #b1522a; */
+  --color-campfire: #ca6036;
+  /* --color-midnight-ocean: #1b2f52; */
+  --color-midnight-ocean: #172845;
+  --color-neutral-gray-blue: #D1D5DC;
 }
 
 @layer base {
@@ -48,7 +69,7 @@ button {
 
 @layer components {
   .btn-primary-lift {
-    @apply inline-block bg-(--color-dusty-pink) text-white px-[20px] py-[10px] rounded-[10px] font-bold duration-300 ease-in-out hover:bg-(--color-dusty-blue) hover:shadow-lg;
+    @apply inline-block bg-(--color-midnight-ocean) text-white px-[20px] py-[10px] rounded-[10px] font-bold duration-300 ease-in-out hover:bg-(--color-campfire) hover:shadow-lg;
     transition-property: background-color, box-shadow;
   }
 
