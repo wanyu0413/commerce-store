@@ -90,7 +90,7 @@ export default function ShopButton() {
       </div>
       <Link
         href="/search"
-        className={`${cuteFont.className} text-xl btn-primary-lift relative z-10 inline-block`}
+        className={`${cuteFont.className} text-[24px] btn-primary-lift relative z-10 inline-block`}
       >
         Shop the Collection
         <svg
@@ -102,7 +102,7 @@ export default function ShopButton() {
             className="squiggle"
             d="M2 8 Q 20 2, 38 8 T 74 8 T 110 8 T 146 8 T 182 8 T 218 8"
             fill="none"
-            stroke="var(--color-campfire)"
+            stroke="var(--color-midnight-ocean)"
             strokeWidth="3"
             strokeLinecap="round"
             strokeDasharray="220"

@@ -1,12 +1,72 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
 import { addItem } from "components/cart/actions";
+import { cuteFont } from "lib/fonts";
 import { Product, ProductVariant } from "lib/shopify/types";
 import { useSearchParams } from "next/navigation";
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useCart } from "./cart-context";
+
+// Dog silhouette clipped to `color` — white/transparent WEBP mask
+// derived from tail_faster.gif (dog opaque, background fully transparent).
+function DogMask({
+  url,
+  color,
+  className = "",
+}: {
+  url: string;
+  color: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`absolute inset-0 ${className}`}
+      style={{
+        backgroundColor: color,
+        WebkitMaskImage: `url(${url})`,
+        maskImage: `url(${url})`,
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+        WebkitMaskPosition: "center",
+        maskPosition: "center",
+        WebkitMaskSize: "contain",
+        maskSize: "contain",
+      }}
+    />
+  );
+}
+
+function DogMaskButton({
+  label,
+  ariaLabel,
+  disabled,
+  color,
+  ...handlers
+}: {
+  label: string;
+  ariaLabel: string;
+  disabled?: boolean;
+  color: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}) {
+  return (
+    <button
+      aria-label={ariaLabel}
+      disabled={disabled}
+      {...handlers}
+      className={`relative inline-block aspect-[579/348] w-64 max-w-full ${disabled ? "cursor-not-allowed" : "hover:opacity-90"
+        }`}
+    >
+      <DogMask url="/tail_faster-mask-still.webp" color={color} />
+      <span
+        className={`${cuteFont.className} relative z-10 flex h-full items-center justify-center text-xl font-bold tracking-wide text-white`}
+      >
+        {label}
+      </span>
+    </button>
+  );
+}
 
 function SubmitButton({
   availableForSale,
@@ -15,44 +75,58 @@ function SubmitButton({
   availableForSale: boolean;
   selectedVariantId: string | undefined;
 }) {
-  const buttonClasses =
-    "relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white";
-  const disabledClasses = "cursor-not-allowed opacity-60 hover:opacity-60";
-
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(buttonClasses, disabledClasses)}>
-        Out Of Stock
-      </button>
+      <DogMaskButton
+        label="Out Of Stock"
+        ariaLabel="Out Of Stock"
+        disabled
+        color="#9ca3af"
+      />
     );
   }
 
   if (!selectedVariantId) {
     return (
-      <button
-        aria-label="Please select an option"
+      <DogMaskButton
+        label="Add To Cart"
+        ariaLabel="Please select an option"
         disabled
-        className={clsx(buttonClasses, disabledClasses)}
-      >
-        <div className="absolute left-0 ml-4">
-          <PlusIcon className="h-5" />
-        </div>
-        Add To Cart
-      </button>
+        color="#9ca3af"
+      />
     );
   }
+
+  return <LiveSubmitButton />;
+}
+
+function LiveSubmitButton() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Warm the browser's cache/decoder for the animated mask ahead of time, so
+  // the very first hover doesn't stall on fetching+decoding it on demand.
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = "/tail_faster-mask.webp";
+  }, []);
+
+  const maskUrl = isHovered
+    ? "/tail_faster-mask.webp"
+    : "/tail_faster-mask-still.webp";
 
   return (
     <button
       aria-label="Add to cart"
-      className={clsx(buttonClasses, {
-        "hover:opacity-90": true,
-      })}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative inline-block aspect-[579/348] w-64 max-w-full scale-100 transition-transform duration-300 ease-out hover:scale-105"
     >
-      <div className="absolute left-0 ml-4">
-        <PlusIcon className="h-5" />
-      </div>
-      Add To Cart
+      <DogMask url={maskUrl} color="rgba(0, 0, 0, 0.9)" />
+      <span
+        className={`${cuteFont.className} pt-2 relative z-10 flex h-full items-center justify-center text-[32px] font-bold tracking-wide text-(--color-dusty-pink) transition-transform duration-300`}
+      >
+        Add To Cart
+      </span>
     </button>
   );
 }

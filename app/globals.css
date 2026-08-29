@@ -8,15 +8,15 @@
   --color-background-light: #f7f6f6;
   --color-background-dark: #1d1515;
   --font-display: "Epilogue", sans-serif;
+  --font-sans: var(--font-source-sans-3), ui-sans-serif, system-ui, sans-serif;
   --radius-xl: 3rem;
 }
 
 :root {
   --color-dusty-pink: #c2a1ae;
-  --color-campfire: #ca6036;
+  --color-dusty-blue: #a1aec2;
+  --color-campfire: #b1522a;
   --color-midnight-ocean: #1b2f52;
-  --color-teal-mint: #6db6d3;
-
 }
 
 @layer base {
@@ -30,10 +30,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+html {
+  color-scheme: dark;
 }
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
@@ -50,7 +48,7 @@ button {
 
 @layer components {
   .btn-primary-lift {
-    @apply inline-block bg-(--color-campfire) text-white px-8 py-4 rounded-[71%_29%_69%_31%/44%_75%_25%_56%] font-bold transition-[background-color,box-shadow] duration-300 ease-in-out hover:bg-(--color-teal-mint) hover:shadow-lg;
+    @apply inline-block bg-(--color-dusty-pink) text-white px-8 py-4 rounded-[10px] font-bold transition-[background-color,box-shadow] duration-300 ease-in-out hover:bg-(--color-dusty-blue) hover:shadow-lg;
   }
 
   .filter-btn {
