@@ -23,7 +23,7 @@ export default function Search() {
         defaultValue={searchParams?.get("q") || ""}
         className={`${cuteFont.className} text-xl w-full border rounded-[10px] bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-md dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400`}
       />
-      <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
+      <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-black">
         <MagnifyingGlassIcon className="h-4" />
       </div>
     </Form>

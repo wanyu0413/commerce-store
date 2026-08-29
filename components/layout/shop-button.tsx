@@ -90,7 +90,7 @@ export default function ShopButton() {
       </div>
       <Link
         href="/search"
-        className={`${cuteFont.className} text-[24px] btn-primary-lift relative z-10 inline-block`}
+        className={`${cuteFont.className} text-[24px] btn-primary-lift relative z-10 inline-block uppercase`}
       >
         Shop the Collection
         <svg

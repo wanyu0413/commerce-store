@@ -48,7 +48,8 @@ button {
 
 @layer components {
   .btn-primary-lift {
-    @apply inline-block bg-(--color-dusty-pink) text-white px-8 py-4 rounded-[10px] font-bold transition-[background-color,box-shadow] duration-300 ease-in-out hover:bg-(--color-dusty-blue) hover:shadow-lg;
+    @apply inline-block bg-(--color-dusty-pink) text-white px-[20px] py-[10px] rounded-[10px] font-bold duration-300 ease-in-out hover:bg-(--color-dusty-blue) hover:shadow-lg;
+    transition-property: background-color, box-shadow;
   }
 
   .filter-btn {

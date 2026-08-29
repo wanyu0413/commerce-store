@@ -1,18 +1,37 @@
 import clsx from "clsx";
-import LogoIcon from "./icons/logo";
 
-export default function LogoSquare({ size }: { size?: "sm" | undefined }) {
+export default function LogoSquare({
+  size,
+  className,
+}: {
+  size?: "sm" | undefined;
+  className?: string;
+}) {
   return (
     <div
       className={clsx(
-        "flex flex-none items-center justify-center"
+        "flex flex-none items-center justify-center",
+        className
       )}
     >
-      <LogoIcon
-        className={clsx({
-          "h-[50px] w-[50px] ": !size,
-          "h-[40px] w-[40px] ": size === "sm",
-        })}
+      <div
+        className={clsx(
+          "bg-current transition-colors duration-300",
+          {
+            "h-[50px] w-[50px]": !size,
+            "h-[40px] w-[40px]": size === "sm",
+          }
+        )}
+        style={{
+          maskImage: "url(/logo.svg)",
+          WebkitMaskImage: "url(/logo.svg)",
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+          maskPosition: "center",
+          WebkitMaskPosition: "center",
+          maskSize: "contain",
+          WebkitMaskSize: "contain",
+        }}
       />
     </div>
   );

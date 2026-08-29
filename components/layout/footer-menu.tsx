@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { cuteFont } from "lib/fonts";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,10 +20,11 @@ export function FooterMenuItem({ item }: { item: Menu }) {
       <Link
         href={item.path}
         className={clsx(
-          "block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300",
+          cuteFont.className,
+          "text-[24px] text-neutral-500 underline-offset-4 hover:text-black transition-all duration-300 ease-in-out hover:underline dark:text-neutral-400 dark:hover:text-neutral-300",
           {
             "text-black dark:text-neutral-300": active,
-          },
+          }
         )}
       >
         {item.title}

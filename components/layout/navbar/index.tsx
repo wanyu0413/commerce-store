@@ -41,7 +41,7 @@ export async function Navbar() {
                   <Link
                     href={item.path}
                     prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+                    className={`${cuteFont.className} text-[24px] text-neutral-500 underline-offset-4 hover:text-black transition-all duration-300 ease-in-out hover:underline dark:text-neutral-400 dark:hover:text-neutral-300`}
                   >
                     {item.title}
                   </Link>
