@@ -76,7 +76,7 @@ export default function CartModal() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-[2px] border-(--color-campfire) bg-white/50 p-6 text-black backdrop-blur-xl md:w-[390px]">
+            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-[2px] border-(--color-campfire) bg-white/50 p-6  text-(--color-midnight-ocean) backdrop-blur-xl md:w-[390px]">
               <div className="flex items-center justify-between">
                 <p className={`${cuteFont.className} text-[32px] font-semibold text-(--color-midnight-ocean)`}>My Cart</p>
                 <button aria-label="Close cart" onClick={closeCart}>
@@ -121,7 +121,7 @@ export default function CartModal() {
                         return (
                           <li
                             key={i}
-                            className="flex w-full flex-col border-b border-neutral-300 text-(--color-midnight-ocean)"
+                            className="flex w-full flex-col border-b border-neutral-300"
                           >
                             <div className="relative flex w-full flex-row justify-between px-1 py-4">
                               <div className="absolute z-40 -ml-1 -mt-2">
