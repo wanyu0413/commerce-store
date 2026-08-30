@@ -1,11 +1,12 @@
 "use client";
 
-import clsx from "clsx";
 import { Dialog, Transition } from "@headlessui/react";
 import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 import LoadingDots from "components/loading-dots";
 import Price from "components/price";
 import { DEFAULT_OPTION } from "lib/constants";
+import { cuteFont } from "lib/fonts";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { useFormStatus } from "react-dom";
 import { createCartAndSetCookie, redirectToCheckout } from "./actions";
 import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
+import DogMask from "./dog-mask";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
 import OpenCart from "./open-cart";
 
@@ -74,9 +76,9 @@ export default function CartModal() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:bg-black/80 dark:text-white">
+            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-[2px] border-(--color-campfire) bg-white/50 p-6 text-black backdrop-blur-xl md:w-[390px]">
               <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">My Cart</p>
+                <p className={`${cuteFont.className} text-[32px] font-semibold text-(--color-midnight-ocean)`}>My Cart</p>
                 <button aria-label="Close cart" onClick={closeCart}>
                   <CloseCart />
                 </button>
@@ -119,7 +121,7 @@ export default function CartModal() {
                         return (
                           <li
                             key={i}
-                            className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
+                            className="flex w-full flex-col border-b border-neutral-300 text-(--color-midnight-ocean)"
                           >
                             <div className="relative flex w-full flex-row justify-between px-1 py-4">
                               <div className="absolute z-40 -ml-1 -mt-2">
@@ -154,7 +156,7 @@ export default function CartModal() {
                                       {item.merchandise.product.title}
                                     </span>
                                     {item.merchandise.title !==
-                                    DEFAULT_OPTION ? (
+                                      DEFAULT_OPTION ? (
                                       <p className="text-sm text-neutral-500 dark:text-neutral-400">
                                         {item.merchandise.title}
                                       </p>
@@ -193,11 +195,11 @@ export default function CartModal() {
                         );
                       })}
                   </ul>
-                  <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
-                    <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
+                  <div className="py-4 text-sm text-white">
+                    <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1">
                       <p>Taxes</p>
                       <Price
-                        className="text-right text-base text-black dark:text-white"
+                        className="text-right text-base text-(--color-midnight-ocean)"
                         amount={cart.cost.totalTaxAmount.amount}
                         currencyCode={cart.cost.totalTaxAmount.currencyCode}
                       />
@@ -209,7 +211,7 @@ export default function CartModal() {
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                       <p>Total</p>
                       <Price
-                        className="text-right text-base text-black dark:text-white"
+                        className="text-right text-base text-(--color-midnight-ocean)"
                         amount={cart.cost.totalAmount.amount}
                         currencyCode={cart.cost.totalAmount.currencyCode}
                       />
@@ -243,14 +245,47 @@ function CloseCart({ className }: { className?: string }) {
 
 function CheckoutButton() {
   const { pending } = useFormStatus();
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Warm the browser's cache/decoder for the animated mask ahead of time, so
+  // the very first hover doesn't stall on fetching+decoding it on demand.
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = "/tail_faster-mask.webp";
+  }, []);
+
+  const maskUrl = isHovered
+    ? "/tail_faster-mask.webp"
+    : "/tail_faster-mask-still.webp";
 
   return (
     <button
-      className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
       type="submit"
       disabled={pending}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="btn-primary-lift relative flex w-full items-center justify-center gap-3 px-[20px] py-[12px] text-white hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
     >
-      {pending ? <LoadingDots className="bg-white" /> : "Proceed to Checkout"}
+      {pending ? (
+        <LoadingDots className="bg-white" />
+      ) : (
+        <>
+          <span
+            className={`${cuteFont.className} z-10 text-[24px] uppercase tracking-wider`}
+          >
+            Proceed to Checkout
+          </span>
+          <div className="absolute right-[10%] top-1/2 aspect-[579/348] w-[120px] -translate-y-[70%]">
+            <DogMask
+              url={maskUrl}
+              color={
+                isHovered ? "var(--color-midnight-ocean)" : "var(--color-campfire)"
+              }
+              className="transition-colors duration-300 ease-in-out"
+            />
+          </div>
+        </>
+      )}
     </button>
   );
 }

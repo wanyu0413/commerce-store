@@ -6,35 +6,7 @@ import { Product, ProductVariant } from "lib/shopify/types";
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { useCart } from "./cart-context";
-
-// Dog silhouette clipped to `color` — white/transparent WEBP mask
-// derived from tail_faster.gif (dog opaque, background fully transparent).
-function DogMask({
-  url,
-  color,
-  className = "",
-}: {
-  url: string;
-  color: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`absolute inset-0 ${className}`}
-      style={{
-        backgroundColor: color,
-        WebkitMaskImage: `url(${url})`,
-        maskImage: `url(${url})`,
-        WebkitMaskRepeat: "no-repeat",
-        maskRepeat: "no-repeat",
-        WebkitMaskPosition: "center",
-        maskPosition: "center",
-        WebkitMaskSize: "contain",
-        maskSize: "contain",
-      }}
-    />
-  );
-}
+import DogMask from "./dog-mask";
 
 function DogMaskButton({
   label,
@@ -120,7 +92,7 @@ function LiveSubmitButton() {
       onMouseLeave={() => setIsHovered(false)}
       className="btn-primary-lift relative w-full flex items-center justify-center gap-3 py-[12px] px-[20px] text-white hover:text-white"
     >
-      <span className={`${cuteFont.className} text-[24px] uppercase tracking-wider`}>
+      <span className={`${cuteFont.className} z-10 text-[24px] uppercase tracking-wider`}>
         Add To Cart
       </span>
       <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">
