@@ -6,6 +6,7 @@ import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { Suspense } from "react";
 import MobileMenu from "./mobile-menu";
+import NavLink from "./nav-link";
 import Search, { SearchSkeleton } from "./search";
 
 const { SITE_NAME } = process.env;
@@ -38,13 +39,12 @@ export async function Navbar() {
             <ul className="hidden gap-6 text-sm md:flex md:items-center">
               {menu.map((item: Menu) => (
                 <li key={item.title}>
-                  <Link
+                  <NavLink
                     href={item.path}
-                    prefetch={true}
-                    className={`${cuteFont.className} text-[24px] text-(--color-neutral-gray-blue) underline-offset-4 hover:text-(--color-campfire) transition-all duration-300 ease-in-out hover:underline`}
+                    className={`${cuteFont.className} text-[24px] text-(--color-neutral-gray-blue) hover:text-(--color-campfire) transition-all duration-300 ease-in-out`}
                   >
                     {item.title}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
