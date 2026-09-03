@@ -1,15 +1,18 @@
-"use client";
-
-import gsap from "gsap";
 import Link from "next/link";
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 
-// Paw-print trail in place of an underline. Enter and leave use different
-// clip-path axes on purpose: revealing grows the visible area in from the
-// left (as if new footprints are being placed), while leaving shrinks it
-// away from the left too — so the trail fades in the order it appeared,
-// like real footprints aging/vanishing behind you, rather than just
-// rewinding the reveal in reverse.
+// Paw-print trail in place of an underline, faded in/out on hover. Split into
+// slices of the same source image (like a sprite sheet — each slice masks a
+// different horizontal portion via mask-position, at a fixed mask-size so
+// they line up seamlessly), each with a slightly later transition-delay, so
+// the trail cascades left-to-right on both fade-in and fade-out rather than
+// appearing/disappearing as one flat block.
+const TRAIL_SLICES = 5;
+const TRAIL_WIDTH = 80; // px, matches the previous w-20
+const TRAIL_HEIGHT = TRAIL_WIDTH * (200 / 824); // preserves the source image's aspect ratio
+const SLICE_WIDTH = TRAIL_WIDTH / TRAIL_SLICES;
+const STAGGER_STEP_MS = 60;
+
 export default function NavLink({
   href,
   className,
@@ -19,60 +22,39 @@ export default function NavLink({
   className?: string;
   children: ReactNode;
 }) {
-  const pawRef = useRef<HTMLSpanElement>(null);
-
-  const handleEnter = () => {
-    const paw = pawRef.current;
-    if (!paw) return;
-    gsap.killTweensOf(paw);
-    gsap.set(paw, { clipPath: "inset(0 100% 0 0)" });
-    gsap.to(paw, {
-      clipPath: "inset(0 0% 0 0)",
-      duration: 0.45,
-      ease: "power2.out",
-    });
-  };
-
-  const handleLeave = () => {
-    const paw = pawRef.current;
-    if (!paw) return;
-    gsap.killTweensOf(paw);
-    gsap.to(paw, {
-      clipPath: "inset(0 0 0 100%)",
-      duration: 0.45,
-      ease: "power2.in",
-    });
-  };
-
   return (
     <Link
       href={href}
       prefetch={true}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      className={`relative ${className ?? ""}`}
+      className={`group relative ${className ?? ""}`}
     >
       {children}
-      {/* aspect-[824/200] matches paw-prints-trail.png's real dimensions, so
-          adjusting `w-*` alone resizes it without distorting the artwork —
-          no need to keep a height value in sync by hand. */}
       <span
-        ref={pawRef}
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-4 right-0 aspect-[824/200] w-20 max-w-none"
-        style={{
-          clipPath: "inset(0 100% 0 0)",
-          backgroundColor: "currentColor",
-          WebkitMaskImage: "url(/paw-prints-trail.png)",
-          maskImage: "url(/paw-prints-trail.png)",
-          WebkitMaskRepeat: "no-repeat",
-          maskRepeat: "no-repeat",
-          WebkitMaskPosition: "left center",
-          maskPosition: "left center",
-          WebkitMaskSize: "contain",
-          maskSize: "contain",
-        }}
-      />
+        className="pointer-events-none absolute -bottom-4 right-0 flex"
+        style={{ width: TRAIL_WIDTH, height: TRAIL_HEIGHT }}
+      >
+        {Array.from({ length: TRAIL_SLICES }, (_, i) => (
+          <span
+            key={i}
+            className="opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+            style={{
+              width: SLICE_WIDTH,
+              height: TRAIL_HEIGHT,
+              backgroundColor: "currentColor",
+              WebkitMaskImage: "url(/paw-prints-trail.png)",
+              maskImage: "url(/paw-prints-trail.png)",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskPosition: `-${i * SLICE_WIDTH}px center`,
+              maskPosition: `-${i * SLICE_WIDTH}px center`,
+              WebkitMaskSize: `${TRAIL_WIDTH}px ${TRAIL_HEIGHT}px`,
+              maskSize: `${TRAIL_WIDTH}px ${TRAIL_HEIGHT}px`,
+              transitionDelay: `${i * STAGGER_STEP_MS}ms`,
+            }}
+          />
+        ))}
+      </span>
     </Link>
   );
 }
