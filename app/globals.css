@@ -117,4 +117,104 @@ button {
       background-position: 100px 50%;
     }
   }
+
+  /* Parallax tilt card, adapted from a CodePen technique (mouse position →
+     card tilt, background image shifts the opposite direction). See
+     TiltCard for the JS setting --rx/--ry/--tx/--ty. */
+  .tilt-card-wrap {
+    perspective: 800px;
+    cursor: pointer;
+  }
+
+  .tilt-card {
+    position: relative;
+    overflow: hidden;
+    transform: rotateY(var(--ry)) rotateX(var(--rx));
+    box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0;
+    transition:
+      transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+      box-shadow 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+
+  .tilt-card-bg {
+    position: absolute;
+    inset: -20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.65;
+    pointer-events: none;
+    transform: translate(var(--tx), var(--ty));
+    transition:
+      transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+      opacity 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+
+  .tilt-card-wrap:hover .tilt-card {
+    box-shadow:
+      rgba(255, 255, 255, 0.2) 0 0 40px 5px,
+      rgba(255, 255, 255, 1) 0 0 0 1px,
+      rgba(0, 0, 0, 0.66) 0 30px 60px 0;
+    transition:
+      transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .tilt-card-wrap:hover .tilt-card-bg {
+    opacity: 0.85;
+    transition:
+      transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Bottom text overlay: mostly hidden at rest (only the title peeks above
+     the translateY cutoff), fully revealed on hover with a gradient scrim
+     fading in behind it, on a deliberately slow multi-second reveal. */
+  .tilt-card-info {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 10;
+    padding: 2.5rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    transform: translateY(40%);
+    transition: transform 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .tilt-card-info::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.6) 100%);
+    opacity: 0;
+    transform: translateY(100%);
+    transition:
+      transform 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+      opacity 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
+
+  .tilt-card-info dd {
+    opacity: 0;
+    transition: opacity 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .tilt-card-wrap:hover .tilt-card-info {
+    transform: translateY(0);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .tilt-card-wrap:hover .tilt-card-info::after {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      transform 5s cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .tilt-card-wrap:hover .tilt-card-info dd {
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
 }
