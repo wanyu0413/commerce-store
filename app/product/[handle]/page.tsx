@@ -81,8 +81,8 @@ export default async function ProductPage(props: {
         }}
       />
       <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-        <div className="flex flex-col rounded-lg border border-(--color-campfire) bg-white/20 p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
+        <div className="flex flex-col rounded-lg border border-(--color-campfire) bg-white/20 p-8 md:p-12 md:flex-row md:gap-8 dark:border-neutral-800 dark:bg-black">
+          <div className="h-full w-full basis-full md:basis-4/6">
             <Suspense
               fallback={
                 <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
@@ -97,7 +97,7 @@ export default async function ProductPage(props: {
             </Suspense>
           </div>
 
-          <div className="basis-full lg:basis-2/6">
+          <div className="basis-full md:basis-2/6">
             <Suspense fallback={null}>
               <ProductDescription product={product} />
             </Suspense>

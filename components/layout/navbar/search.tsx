@@ -12,7 +12,7 @@ export default function Search() {
   return (
     <Form
       action="/search"
-      className="w-max-[550px] relative w-full lg:w-80 xl:w-full"
+      className="w-max-[550px] relative w-full md:w-80 xl:w-full"
     >
       <input
         key={searchParams?.get("q")}
@@ -32,7 +32,7 @@ export default function Search() {
 
 export function SearchSkeleton() {
   return (
-    <form className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
+    <form className="w-max-[550px] relative w-full md:w-80 xl:w-full">
       <input
         placeholder="Search for products..."
         className={`${cuteFont.className} w-full border rounded-[10px] bg-white px-4 py-2 text-xl text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400`}
