@@ -138,7 +138,6 @@ button {
      TiltCard for the JS setting --rx/--ry/--tx/--ty. */
   .tilt-card-wrap {
     perspective: 800px;
-    cursor: pointer;
   }
 
   .tilt-card {
