@@ -93,12 +93,27 @@ button {
     -webkit-text-stroke: 1px var(--color-campfire);
     background-clip: text;
     -webkit-background-clip: text;
-    background-image: linear-gradient(to bottom,
-        var(--color-campfire) 50%,
-        transparent 50%);
-    background-size: 100% 200%;
     background-repeat: no-repeat;
-    background-position: 50% calc((1 - var(--progress, 1)) * 100%);
+    /* Hard-edged fill boundary placed directly at --progress: fully solid at
+       progress 1, fully transparent at progress 0. Top-anchored, so as
+       progress grows the fill grows downward (top-to-bottom sweep). */
+    background-image: linear-gradient(to bottom,
+        var(--color-campfire) 0%,
+        var(--color-campfire) calc(var(--progress, 1) * 100%),
+        transparent calc(var(--progress, 1) * 100%),
+        transparent 100%);
+  }
+
+  /* Alternate words fill/unfill from the opposite edge: flipping the
+     gradient direction anchors the fill to the bottom instead, so it sweeps
+     bottom-to-top, while progress 1/0 still map to the same
+     fully-filled/fully-unfilled endpoints as the non-reversed words. */
+  .scroll-fill-word--reverse::before {
+    background-image: linear-gradient(to top,
+        var(--color-campfire) 0%,
+        var(--color-campfire) calc(var(--progress, 1) * 100%),
+        transparent calc(var(--progress, 1) * 100%),
+        transparent 100%);
   }
 
   .scroll-fill-word::after {

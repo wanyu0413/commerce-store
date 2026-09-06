@@ -52,7 +52,10 @@ export default function ScrollFillHeading({
     <h2 ref={ref} className={`scroll-fill-heading ${className ?? ""}`}>
       {words.map((word, i) => (
         <Fragment key={i}>
-          <span data-word={word} className="scroll-fill-word">
+          <span
+            data-word={word}
+            className={`scroll-fill-word ${i % 2 === 1 ? "scroll-fill-word--reverse" : ""}`}
+          >
             {word}
           </span>
           {i < words.length - 1 ? " " : ""}
