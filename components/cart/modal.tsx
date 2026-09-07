@@ -25,6 +25,8 @@ type MerchandiseSearchParams = {
 };
 
 const LABEL_CLASS = `${cuteFont.className} text-[24px] text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
+const ICON_ONLY_CLASS =
+  "text-current transition-colors duration-300 ease-in-out hover:text-(--color-campfire)";
 
 export default function CartModal({
   iconClassName = "h-6 w-6",
@@ -66,7 +68,7 @@ export default function CartModal({
         className={
           label
             ? `group relative flex items-center gap-2 ${LABEL_CLASS}`
-            : undefined
+            : ICON_ONLY_CLASS
         }
       >
         <OpenCart className={iconClassName} quantity={cart?.totalQuantity} />

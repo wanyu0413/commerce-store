@@ -5,10 +5,12 @@ import PawTrail from "./paw-trail";
 export default function NavLink({
   href,
   className,
+  showTrail = true,
   children,
 }: {
   href: string;
   className?: string;
+  showTrail?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -18,7 +20,7 @@ export default function NavLink({
       className={`group relative ${className ?? ""}`}
     >
       {children}
-      <PawTrail />
+      {showTrail && <PawTrail />}
     </Link>
   );
 }
