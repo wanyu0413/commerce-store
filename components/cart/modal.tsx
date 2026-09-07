@@ -17,13 +17,24 @@ import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
 import DogMask from "./dog-mask";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
+import PawTrail from "components/layout/navbar/paw-trail";
 import OpenCart from "./open-cart";
 
 type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-export default function CartModal() {
+// Matches the font/color/hover treatment shared by the other nav-row items
+// (All Collections, Your Orders, Search) — see NavLink/SearchAction.
+const LABEL_CLASS = `${cuteFont.className} text-[24px] text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
+
+export default function CartModal({
+  iconClassName = "h-6 w-6",
+  label,
+}: {
+  iconClassName?: string;
+  label?: string;
+} = {}) {
   const { cart, updateCartItem } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
@@ -51,8 +62,18 @@ export default function CartModal() {
 
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart}>
-        <OpenCart quantity={cart?.totalQuantity} />
+      <button
+        aria-label="Open cart"
+        onClick={openCart}
+        className={
+          label
+            ? `group relative flex items-center gap-2 ${LABEL_CLASS}`
+            : undefined
+        }
+      >
+        <OpenCart className={iconClassName} quantity={cart?.totalQuantity} />
+        {label}
+        {label ? <PawTrail /> : null}
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeCart} className="relative z-50">

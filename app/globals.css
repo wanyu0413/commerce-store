@@ -67,6 +67,16 @@ button {
   @apply focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
 }
 
+/* SearchAction's inline input: only ever an underline, never the shared
+   focus-ring box above. That rule is unlayered CSS (so it always beats any
+   Tailwind utility class regardless of specificity), meaning this needs a
+   more specific unlayered selector of its own to win, not another utility
+   class on the element. */
+.search-action-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 @layer components {
   .btn-primary-lift {
     @apply inline-block bg-(--color-midnight-ocean) text-white px-[20px] py-[10px] rounded-[10px] font-bold duration-300 ease-in-out hover:bg-(--color-campfire) hover:shadow-lg;
