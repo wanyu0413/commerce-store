@@ -1,13 +1,4 @@
-// Paw-print trail in place of an underline, faded in/out on hover. Split into
-// slices of the same source image (like a sprite sheet — each slice masks a
-// different horizontal portion via mask-position, at a fixed mask-size so
-// they line up seamlessly), each with a slightly later transition-delay, so
-// the trail cascades left-to-right on both fade-in and fade-out rather than
-// appearing/disappearing as one flat block.
-//
-// Extracted from NavLink so any "group relative" trigger — a real Link
-// (NavLink) or a plain button (e.g. the cart trigger) — can share the same
-// hover flourish.
+// Paw-print hover trail, sliced/staggered for a cascading fade.
 const TRAIL_SLICES = 5;
 const TRAIL_WIDTH = 80; // px, matches the previous w-20
 const TRAIL_HEIGHT = TRAIL_WIDTH * (200 / 824); // preserves the source image's aspect ratio
@@ -28,7 +19,7 @@ export default function PawTrail() {
           style={{
             width: SLICE_WIDTH,
             height: TRAIL_HEIGHT,
-            backgroundColor: "currentColor",
+            backgroundColor: "var(--color-campfire)",
             WebkitMaskImage: "url(/paw-prints-trail.png)",
             maskImage: "url(/paw-prints-trail.png)",
             WebkitMaskRepeat: "no-repeat",

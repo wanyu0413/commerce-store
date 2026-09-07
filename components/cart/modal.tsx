@@ -24,8 +24,6 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-// Matches the font/color/hover treatment shared by the other nav-row items
-// (All Collections, Your Orders, Search) — see NavLink/SearchAction.
 const LABEL_CLASS = `${cuteFont.className} text-[24px] text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
 
 export default function CartModal({

@@ -10,11 +10,11 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="relative z-10 text-center px-4 w-1/3">
-                <h1 className={`${cuteFont.className} text-5xl md:text-7xl font-bold text-black drop-shadow-lg mb-4`}>
-                    LONGLOAF🐾
+            <div className="relative z-10 flex flex-col items-center px-4 text-center">
+                <h1 className={`${cuteFont.className} text-[110px] leading-none font-bold text-black drop-shadow-lg`}>
+                    LONGLOAF
                 </h1>
-                <p className="text-lg text-gray-600 drop-shadow-md mb-14 max-w-lg mx-auto">
+                <p className="text-lg text-gray-600 drop-shadow-md mt-6 mb-14 max-w-lg">
                     Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.
                 </p>
                 <ShopButton />

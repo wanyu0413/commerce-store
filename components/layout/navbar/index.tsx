@@ -6,8 +6,6 @@ import NavAnimator from "./nav-animator";
 import NavBrand from "./nav-brand";
 import NavRail from "./nav-rail";
 
-const { SITE_NAME } = process.env;
-
 export async function Navbar() {
   const menu = await getMenu("next-js-frontend-header-menu");
 
@@ -21,10 +19,11 @@ export async function Navbar() {
       <div className="flex w-full items-center">
         <NavAnimator
           expanded={
-            <>
-              <NavBrand siteName={SITE_NAME} />
+            <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
+              <div />
+              <NavBrand />
               <NavActions menu={menu} />
-            </>
+            </div>
           }
           compact={<NavRail menu={menu} />}
         />
