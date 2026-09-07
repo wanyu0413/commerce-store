@@ -35,7 +35,7 @@ export default async function RootLayout({
       <body className="bg-(--color-midnight-ocean) text-white selection:bg-teal-300 selection:text-white" suppressHydrationWarning>
         <CartProvider cartPromise={cart}>
           <Navbar />
-          <main>
+          <main className="pt-20">
             {children}
             <Toaster closeButton />
             <WelcomeToast />

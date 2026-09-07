@@ -21,9 +21,9 @@ export default function Search() {
         placeholder="Search for products..."
         autoComplete="off"
         defaultValue={searchParams?.get("q") || ""}
-        className={`${cuteFont.className} text-xl w-full border rounded-[10px] bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-md dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400`}
+        className={`${cuteFont.className} text-xl w-full border border-(--color-midnight-ocean)/40 rounded-[10px] bg-white/10 px-4 py-2 text-(--color-midnight-ocean) placeholder:text-(--color-midnight-ocean)/60 backdrop-blur-sm md:text-md`}
       />
-      <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-black">
+      <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-(--color-midnight-ocean)">
         <MagnifyingGlassIcon className="h-4" />
       </div>
     </Form>
@@ -35,9 +35,9 @@ export function SearchSkeleton() {
     <form className="w-max-[550px] relative w-full md:w-80 xl:w-full">
       <input
         placeholder="Search for products..."
-        className={`${cuteFont.className} w-full border rounded-[10px] bg-white px-4 py-2 text-xl text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400`}
+        className={`${cuteFont.className} w-full border border-(--color-midnight-ocean)/40 rounded-[10px] bg-white/10 px-4 py-2 text-xl text-(--color-midnight-ocean) placeholder:text-(--color-midnight-ocean)/60 backdrop-blur-sm`}
       />
-      <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
+      <div className="absolute right-0 top-0 mr-3 flex h-full items-center text-(--color-midnight-ocean)">
         <MagnifyingGlassIcon className="h-4" />
       </div>
     </form>

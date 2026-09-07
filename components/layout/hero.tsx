@@ -4,7 +4,7 @@ import ShopButton from './shop-button';
 
 export default function Hero() {
     return (
-        <section className="relative w-full h-[800px] flex flex-col items-center justify-center overflow-hidden">
+        <section className="relative -mt-20 w-full h-[800px] flex flex-col items-center justify-center overflow-hidden">
             <div className="absolute inset-0 flex w-full h-full">
                 <div className="relative flex-1 h-full bg-[url(/hero-babies.png)] bg-center bg-cover">
                 </div>
