@@ -1,4 +1,5 @@
 import { getMenu } from "lib/shopify";
+import MobileNavBar from "./mobile-nav-bar";
 import NavItems from "./nav-items";
 
 export async function Navbar() {
@@ -6,6 +7,7 @@ export async function Navbar() {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-20 flex items-center justify-between bg-transparent p-4 md:px-6">
+      <MobileNavBar menu={menu} />
       <NavItems menu={menu} />
     </nav>
   );

@@ -28,7 +28,7 @@ export default function SearchAction() {
           placeholder="Search for products..."
           autoComplete="off"
           defaultValue={searchParams?.get("q") || ""}
-          className={`search-action-input pointer-events-none absolute inset-0 w-full border-0 border-b border-(--color-campfire) bg-transparent text-xl text-current opacity-0 outline-none placeholder:text-current/60 transition-opacity duration-200 ease-in-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${cuteFont.className}`}
+          className={`search-action-input pointer-events-none absolute inset-0 w-full border-0 border-b border-(--color-campfire) bg-transparent text-xl text-(--color-campfire) opacity-0 outline-none placeholder:text-current/60 transition-opacity duration-200 ease-in-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${cuteFont.className}`}
         />
       </div>
     </Form>

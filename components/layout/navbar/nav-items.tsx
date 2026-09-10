@@ -17,26 +17,16 @@ import SearchAction from "./search-action";
 const NAV_HEIGHT = 80;
 const ITEM_CLASS = `${cuteFont.className} flex items-center gap-2 text-[24px] hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
 
-// Three layout phases the nav content physically moves through, via GSAP
-// Flip, rather than crossfading between two separately-built layouts:
-//   expanded  — full row, labels visible, centered logo (home, pre-scroll)
-//   docked    — same row, slid to the right edge, labels hidden (icons only)
-//   collapsed — the docked row drops into a vertical stack (the rail)
-// Collapsing runs expanded -> docked -> collapsed; expanding reverses it —
-// tracing an "L"/"7" shaped path (slide right, then turn and drop down)
-// instead of a single diagonal tween.
+// expanded -> docked -> collapsed via GSAP Flip (slide right, then drop
+// vertical), reversed to expand. See ROOT_CLASS below for each phase.
 type Phase = "expanded" | "docked" | "collapsed";
 
 const ROOT_CLASS: Record<Phase, string> = {
   expanded: "hidden md:grid w-full grid-cols-[1fr_auto_1fr] items-center",
   docked: "hidden md:flex fixed right-4 top-4 z-20 md:right-6 items-center gap-4",
-  // Visible at every width, not just md+ — mobile always shows this same
-  // vertical rail rather than a separate hamburger-drawer bar. On mobile it
-  // starts near the top (matching where the old mobile cart icon sat) so
-  // it can read as part of the Hero's own parallax motion; on desktop it's
-  // vertically centered as before.
+  // Desktop only — mobile uses MobileNavBar instead.
   collapsed:
-    "flex fixed right-4 top-4 z-20 flex-col items-center gap-5 md:top-1/2 md:-translate-y-1/2 md:right-6",
+    "hidden md:flex fixed right-4 top-4 z-20 flex-col items-center gap-5 md:top-1/2 md:-translate-y-1/2 md:right-6",
 };
 
 const GROUP_CLASS: Record<Phase, string> = {
@@ -51,18 +41,14 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const flipStateRef = useRef<ReturnType<typeof Flip.getState> | null>(null);
   const collapsedTargetRef = useRef(!isHome);
-  // `nonce` forces the animation effect below to re-fire on every transition
-  // even if `phase` repeats the same value as before (e.g. an overlapping
-  // scroll-direction reversal calling goToPhase("docked") again mid-flight)
-  // — keying the effect on `phase` alone would let React bail out silently
-  // on a same-value update, permanently stalling the sequence.
+  // nonce forces re-animation even on a same-value phase (avoids a stuck
+  // sequence if goToPhase("docked") fires twice from overlapping scrolls).
   const [render, setRender] = useState<{ phase: Phase; nonce: number }>({
     phase: isHome ? "expanded" : "collapsed",
     nonce: 0,
   });
-  // Layout collapses fast (as soon as scrolled past the nav's own height),
-  // but the white Hero photo behind it takes much longer to actually scroll
-  // away — so color is tracked separately, following the real background.
+  // Tracks the real Hero background separately — layout collapses fast,
+  // but the white photo takes longer to actually scroll away.
   const [overHero, setOverHero] = useState(isHome);
 
   const goToPhase = (next: Phase) => {
@@ -81,9 +67,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
     gsap.registerPlugin(Flip);
   }, []);
 
-  // Decide the target (collapsed vs expanded) from route + scroll position.
-  // Triggers as soon as the page has scrolled past the nav's own height,
-  // not once the whole Hero has scrolled away — a much snappier reaction.
+  // Target collapsed/expanded from route + scroll (fires past NAV_HEIGHT).
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     let hasMounted = false;
@@ -92,13 +76,9 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
       if (collapsedTargetRef.current === collapsed) return;
       collapsedTargetRef.current = collapsed;
       if (!mq.matches || !hasMounted) {
-        // No real "before" state to animate from — either there's no
-        // horizontal row to slide from (mobile), or this is the very first
-        // check on load (e.g. reloading the page already scrolled down),
-        // where the user never saw an earlier state to transition out of.
-        // Snap straight to the correct phase instead of routing through
-        // the animated docked waypoint, which would otherwise get stuck
-        // there since it has nothing real to Flip from.
+        // No real "before" state to animate from (mobile, or first load
+        // already scrolled) — snap directly instead of via the docked
+        // waypoint, which would otherwise get stuck with nothing to Flip.
         setRender((prev) => ({
           phase: collapsed ? "collapsed" : "expanded",
           nonce: prev.nonce,
@@ -115,11 +95,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
         setOverHero(false);
         return;
       }
-      // The collapsed rail sits at the vertical center of the screen, not
-      // at the top — so "still over hero" has to compare the Hero's own
-      // bottom edge against the rail's position, not against scroll
-      // distance vs the Hero's total height (which ignores where the rail
-      // actually sits and can leave text invisible against its own match).
+      // Compare against the rail's own position (mid-screen), not NAV_HEIGHT.
       const hero = document.querySelector<HTMLElement>("[data-hero-section]");
       const railY = window.innerHeight / 2;
       setOverHero(hero ? hero.getBoundingClientRect().bottom > railY : false);
@@ -145,8 +121,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
     };
   }, [isHome]);
 
-  // Play the Flip step for whichever phase we just switched to, then
-  // continue toward the final target if "docked" was only a waypoint.
+  // Plays each Flip step, continuing docked -> final phase via onComplete.
   useEffect(() => {
     const state = flipStateRef.current;
     if (!state) return;
@@ -164,9 +139,11 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
   }, [render.nonce]);
 
   const showLabels = phase === "expanded";
+  const isVertical = phase === "collapsed";
   const colorClass = overHero
     ? "text-(--color-midnight-ocean)"
     : "text-(--color-neutral-gray-blue)";
+  const chipClass = `rail-icon-chip${overHero ? " rail-icon-chip--light" : ""}`;
 
   return (
     <div ref={containerRef} className={`${ROOT_CLASS[phase]} ${colorClass}`}>
@@ -181,7 +158,11 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
           const Icon = iconForMenuItem(item.title);
           return (
             <div key={item.title} data-flip-id={`menu-${item.title}`}>
-              <NavLink href={item.path} className={ITEM_CLASS} showTrail={showLabels}>
+              <NavLink
+                href={item.path}
+                className={isVertical ? chipClass : ITEM_CLASS}
+                showTrail={showLabels}
+              >
                 <Icon className="h-5 w-5 shrink-0" />
                 {showLabels && item.title}
               </NavLink>
@@ -197,7 +178,11 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
               prefetch={true}
               aria-label="Search"
               title="Search"
-              className="transition-colors duration-300 ease-in-out hover:text-(--color-campfire)"
+              className={
+                isVertical
+                  ? chipClass
+                  : "transition-colors duration-300 ease-in-out hover:text-(--color-campfire)"
+              }
             >
               <MagnifyingGlassIcon className="h-5 w-5" />
             </Link>
@@ -207,6 +192,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
           <CartModal
             iconClassName="h-5 w-5"
             label={showLabels ? "Cart" : undefined}
+            iconOnlyClassName={isVertical ? chipClass : undefined}
           />
         </div>
       </div>

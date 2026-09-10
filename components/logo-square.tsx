@@ -18,8 +18,8 @@ export default function LogoSquare({
         className={clsx(
           "bg-current transition-colors duration-300",
           {
-            "h-[50px] w-[50px] md:h-[80px] md:w-[80px]": !size,
-            "h-[40px] w-[40px]": size === "sm",
+            "h-[60px] w-[60px] md:h-[80px] md:w-[80px]": !size,
+            "h-[50px] w-[50px]": size === "sm",
           }
         )}
         style={{

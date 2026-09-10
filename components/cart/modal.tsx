@@ -31,9 +31,11 @@ const ICON_ONLY_CLASS =
 export default function CartModal({
   iconClassName = "h-6 w-6",
   label,
+  iconOnlyClassName = ICON_ONLY_CLASS,
 }: {
   iconClassName?: string;
   label?: string;
+  iconOnlyClassName?: string;
 } = {}) {
   const { cart, updateCartItem } = useCart();
   const [isOpen, setIsOpen] = useState(false);
@@ -68,7 +70,7 @@ export default function CartModal({
         className={
           label
             ? `group relative flex items-center gap-2 ${LABEL_CLASS}`
-            : ICON_ONLY_CLASS
+            : iconOnlyClassName
         }
       >
         <OpenCart className={iconClassName} quantity={cart?.totalQuantity} />
