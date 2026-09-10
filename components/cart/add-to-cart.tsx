@@ -27,7 +27,7 @@ function DogMaskButton({
       aria-label={ariaLabel}
       disabled={disabled}
       {...handlers}
-      className="relative w-full flex items-center justify-center gap-3 bg-neutral-800 text-neutral-400 py-[12px] px-[20px] rounded-[10px] font-bold cursor-not-allowed opacity-50"
+      className="relative w-full flex items-center justify-center gap-3 bg-neutral-800 text-neutral-400 py-[12px] px-[20px] rounded-[9999px] font-bold cursor-not-allowed opacity-50"
     >
       <span className={`${cuteFont.className} text-[24px] uppercase tracking-wider`}>
         {label}

@@ -78,9 +78,20 @@ button {
 }
 
 @layer components {
+
+  /* Same neumorphic surface as the nav (see .neumorphic-surface below);
+     always the light variant since it sits over the Hero photo. */
   .btn-primary-lift {
-    @apply inline-block bg-(--color-midnight-ocean) text-white px-[20px] py-[10px] rounded-[10px] font-bold duration-300 ease-in-out hover:bg-(--color-campfire) hover:shadow-lg;
-    transition-property: background-color, box-shadow;
+    @apply inline-block px-[40px] py-[20px] rounded-[9999px] font-bold text-(--color-midnight-ocean);
+  }
+
+  .btn-primary-lift:hover {
+    color: var(--color-campfire);
+    box-shadow:
+      3px 3px 5px 0 var(--shadow-dark) inset,
+      -3px -3px 6px 0 var(--shadow-light) inset,
+      -3px -3px 7px 0 var(--shadow-dark),
+      2px 2px 6px 0 var(--shadow-light);
   }
 
   .filter-btn {
@@ -242,17 +253,13 @@ button {
     transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  /* Neumorphic rail icon */
-  .rail-icon-chip {
+  /* Neumorphic surface: shared bg/shadow, reused by the rail icon chips and
+     the mobile nav bar so both always have their own self-contained
+     contrast regardless of whatever scrolls behind them. */
+  .neumorphic-surface {
     --shadow-dark: rgba(0, 0, 0, 0.45);
     --shadow-light: rgba(94, 114, 150, 0.35);
     --chip-bg: var(--color-midnight-ocean);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 9999px;
     background-color: var(--chip-bg);
     box-shadow:
       -3px -3px 5px 0 var(--shadow-dark) inset,
@@ -265,11 +272,20 @@ button {
       background-color 0.3s ease-in-out;
   }
 
-  /* Light variant for when the rail still sits over the white Hero. */
-  .rail-icon-chip--light {
+  /* Light variant for when a surface still sits over the white Hero. */
+  .neumorphic-surface--light {
     --shadow-dark: rgba(23, 40, 69, 0.18);
     --shadow-light: rgba(255, 255, 255, 0.9);
     --chip-bg: var(--color-background-light);
+  }
+
+  .rail-icon-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
   }
 
   .rail-icon-chip:hover {
@@ -279,5 +295,15 @@ button {
       -3px -3px 6px 0 var(--shadow-light) inset,
       -3px -3px 7px 0 var(--shadow-dark),
       2px 2px 6px 0 var(--shadow-light);
+  }
+
+  .mobile-nav-bar {
+    border-radius: 9999px;
+    padding: 0.625rem 1.25rem;
+  }
+
+  /* Open hamburger drawer: same neumorphic surface as the rest of the nav. */
+  .mobile-menu-panel {
+    border-radius: 1.5rem 0 0 1.5rem;
   }
 }

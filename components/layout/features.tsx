@@ -23,7 +23,7 @@ const features = [
 export function Features() {
     return (
         <section className="bg-[transparent] py-24 sm:py-32">
-            <div className="mx-auto max-w-7xl px-6 md:px-8">
+            <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
                 <div className="mx-auto max-w-2xl text-center">
                     <ScrollFillHeading
                         text="Designed for Dachshund's Health"
@@ -38,7 +38,7 @@ export function Features() {
                         <TiltCard
                             key={feature.name}
                             image={feature.image}
-                            className="flex flex-col aspect-[378/222] bg-(--color-midnight-ocean) rounded-[10px] p-10"
+                            className="flex flex-col aspect-[378/222] bg-(--color-midnight-ocean) rounded-[25px] p-10"
                         >
                             <dt className={`${cuteFont.className} text-[40px] font-bold leading-none text-(--color-neutral-gray-blue) text-right`}>
                                 {feature.name}

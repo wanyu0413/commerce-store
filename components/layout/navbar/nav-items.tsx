@@ -143,7 +143,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
   const colorClass = overHero
     ? "text-(--color-midnight-ocean)"
     : "text-(--color-neutral-gray-blue)";
-  const chipClass = `rail-icon-chip${overHero ? " rail-icon-chip--light" : ""}`;
+  const chipClass = `neumorphic-surface rail-icon-chip${overHero ? " neumorphic-surface--light" : ""}`;
 
   return (
     <div ref={containerRef} className={`${ROOT_CLASS[phase]} ${colorClass}`}>

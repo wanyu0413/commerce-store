@@ -15,6 +15,22 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
     setIsOpen(false);
   }, [pathname]);
 
+  // Headless UI's Dialog locks body/html scroll while open by default (and
+  // reapplies it across its own render cycles); this drawer isn't a blocking
+  // modal, so keep undoing it via observer for as long as it's open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const html = document.documentElement;
+    const reset = () => {
+      if (html.style.overflow) html.style.overflow = "";
+      if (html.style.paddingRight) html.style.paddingRight = "";
+    };
+    reset();
+    const observer = new MutationObserver(reset);
+    observer.observe(html, { attributes: true, attributeFilter: ["style"] });
+    return () => observer.disconnect();
+  }, [isOpen]);
+
   return (
     <>
       <button
@@ -46,11 +62,11 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex w-full max-w-xs flex-col bg-(--color-midnight-ocean) p-6 text-(--color-neutral-gray-blue)">
+            <Dialog.Panel className="neumorphic-surface mobile-menu-panel fixed bottom-0 right-0 top-0 flex w-full max-w-xs flex-col p-6 text-(--color-neutral-gray-blue)">
               <button
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
-                className="mb-6 flex h-10 w-10 items-center justify-center self-end"
+                className="neumorphic-surface rail-icon-chip mb-6 self-end"
               >
                 <XMarkIcon className="h-6 w-6" />
               </button>
