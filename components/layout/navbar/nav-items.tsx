@@ -29,7 +29,16 @@ const ROOT_CLASS: Record<Phase, string> = {
     "hidden md:flex fixed right-4 top-4 z-20 flex-col items-center gap-5 md:top-1/2 md:-translate-y-1/2 md:right-6",
 };
 
-const GROUP_CLASS: Record<Phase, string> = {
+// Menu links sit in the grid's left column when expanded; search/cart sit in
+// the right column. Docked/collapsed aren't grid-based, so both groups just
+// flow into the same rail (order classes below put the logo first there).
+const MENU_GROUP_CLASS: Record<Phase, string> = {
+  expanded: "flex items-center gap-4 justify-self-start",
+  docked: "flex items-center gap-4",
+  collapsed: "flex flex-col items-center gap-5",
+};
+
+const ACTIONS_GROUP_CLASS: Record<Phase, string> = {
   expanded: "flex items-center gap-4 justify-self-end",
   docked: "flex items-center gap-4",
   collapsed: "flex flex-col items-center gap-5",
@@ -145,15 +154,16 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
     : "text-(--color-neutral-gray-blue)";
   const chipClass = `neumorphic-surface rail-icon-chip${overHero ? " neumorphic-surface--light" : ""}`;
 
+  // Docked/collapsed aren't grid columns, so pull the logo back to visually
+  // lead the rail (matches the pre-split order) instead of the source order
+  // grid placement needs (menu, logo, actions).
+  const orderClass = showLabels
+    ? { menu: "", logo: "", actions: "" }
+    : { menu: "order-2", logo: "order-1", actions: "order-3" };
+
   return (
     <div ref={containerRef} className={`${ROOT_CLASS[phase]} ${colorClass}`}>
-      <div key="spacer" />
-      <div key="logo" data-flip-id="logo">
-        <Link href="/" prefetch={true} aria-label="Home" className="flex items-center justify-self-center">
-          <LogoSquare size={showLabels ? undefined : "sm"} />
-        </Link>
-      </div>
-      <div key="group" className={GROUP_CLASS[phase]}>
+      <div key="menu-group" className={`${MENU_GROUP_CLASS[phase]} ${orderClass.menu}`}>
         {menu.map((item: Menu) => {
           const Icon = iconForMenuItem(item.title);
           return (
@@ -169,6 +179,13 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
             </div>
           );
         })}
+      </div>
+      <div key="logo" data-flip-id="logo" className={orderClass.logo}>
+        <Link href="/" prefetch={true} aria-label="Home" className="flex items-center justify-self-center">
+          <LogoSquare size={showLabels ? undefined : "sm"} />
+        </Link>
+      </div>
+      <div key="actions-group" className={`${ACTIONS_GROUP_CLASS[phase]} ${orderClass.actions}`}>
         <div key="search" data-flip-id="search">
           {showLabels ? (
             <SearchAction />

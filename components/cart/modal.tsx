@@ -17,7 +17,6 @@ import { useCart } from "./cart-context";
 import { DeleteItemButton } from "./delete-item-button";
 import DogMask from "./dog-mask";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
-import PawTrail from "components/layout/navbar/paw-trail";
 import OpenCart from "./open-cart";
 
 type MerchandiseSearchParams = {
@@ -68,14 +67,11 @@ export default function CartModal({
         aria-label="Open cart"
         onClick={openCart}
         className={
-          label
-            ? `group relative flex items-center gap-2 ${LABEL_CLASS}`
-            : iconOnlyClassName
+          label ? `flex items-center gap-2 ${LABEL_CLASS}` : iconOnlyClassName
         }
       >
         <OpenCart className={iconClassName} quantity={cart?.totalQuantity} />
         {label}
-        {label ? <PawTrail /> : null}
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeCart} className="relative z-50">

@@ -41,7 +41,7 @@ export default function ProductGridItems({
             <Link href={`/product/${product.handle}`} className="block w-full h-full relative cursor-pointer">
               <div className="relative aspect-square overflow-hidden rounded-xl bg-slate-100 mb-4 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] dark:from-slate-800 dark:to-slate-900 border border-primary/10">
                 <Image
-                  src={product.featuredImage?.url || '/hero-babies.png'}
+                  src={product.featuredImage?.url || '/hero.png'}
                   alt={product.title}
                   fill
                   sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
