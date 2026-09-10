@@ -86,14 +86,23 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
   // not once the whole Hero has scrolled away — a much snappier reaction.
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
+    let hasMounted = false;
 
     const setTarget = (collapsed: boolean) => {
       if (collapsedTargetRef.current === collapsed) return;
       collapsedTargetRef.current = collapsed;
-      if (!mq.matches) {
-        // Below md there's no horizontal row to animate from — the rail is
-        // just always the mobile nav, no Flip waypoint needed.
-        setRender((prev) => ({ phase: "collapsed", nonce: prev.nonce }));
+      if (!mq.matches || !hasMounted) {
+        // No real "before" state to animate from — either there's no
+        // horizontal row to slide from (mobile), or this is the very first
+        // check on load (e.g. reloading the page already scrolled down),
+        // where the user never saw an earlier state to transition out of.
+        // Snap straight to the correct phase instead of routing through
+        // the animated docked waypoint, which would otherwise get stuck
+        // there since it has nothing real to Flip from.
+        setRender((prev) => ({
+          phase: collapsed ? "collapsed" : "expanded",
+          nonce: prev.nonce,
+        }));
         return;
       }
       goToPhase("docked");
@@ -127,6 +136,7 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
     };
 
     evaluate();
+    hasMounted = true;
     mq.addEventListener("change", evaluate);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
