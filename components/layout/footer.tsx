@@ -25,7 +25,7 @@ export default async function Footer() {
             href="/"
           >
             <LogoSquare size="sm" />
-            <span className={`${cuteFont.className} text-2xl uppercase`}>
+            <span className={`${cuteFont.className} text-2xl uppercase tracking-wider`}>
               {SITE_NAME}
             </span>
           </Link>

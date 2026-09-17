@@ -21,7 +21,7 @@ export function FooterMenuItem({ item }: { item: Menu }) {
         href={item.path}
         className={clsx(
           cuteFont.className,
-          "text-[24px] text-(--color-neutral-gray-blue) underline-offset-4 hover:text-(--color-campfire) transition-all duration-300 ease-in-out hover:underline",
+          "text-[24px] tracking-wider text-(--color-neutral-gray-blue) underline-offset-4 hover:text-(--color-campfire) transition-all duration-300 ease-in-out hover:underline",
           {
             "text-(--color-campfire)": active,
           }

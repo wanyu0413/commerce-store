@@ -15,7 +15,7 @@ import NavLink from "./nav-link";
 import SearchAction from "./search-action";
 
 const NAV_HEIGHT = 80;
-const ITEM_CLASS = `${cuteFont.className} flex items-center gap-2 text-[24px] hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
+const ITEM_CLASS = `${cuteFont.className} flex items-center gap-2 text-[24px] tracking-wider hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
 
 // expanded -> docked -> collapsed via GSAP Flip (slide right, then drop
 // vertical), reversed to expand. See ROOT_CLASS below for each phase.

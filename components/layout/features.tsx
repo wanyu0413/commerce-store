@@ -27,7 +27,7 @@ export function Features() {
                 <div className="mx-auto max-w-2xl text-center">
                     <ScrollFillHeading
                         text="Designed for Dachshund's Health"
-                        className={`${cuteFont.className} text-[100px] leading-none tracking-tight`}
+                        className={`${cuteFont.className} text-[100px] leading-none tracking-wider`}
                     />
                     <p className="mt-4 text-lg leading-8 text-(--color-neutral-gray-blue)">
                         Every detail crafted to protect your dog's unique anatomy and prevent long-term back issues.
@@ -40,7 +40,7 @@ export function Features() {
                             image={feature.image}
                             className="flex flex-col aspect-[378/222] bg-(--color-midnight-ocean) rounded-[25px] p-10"
                         >
-                            <dt className={`${cuteFont.className} text-[40px] font-bold leading-none text-(--color-neutral-gray-blue) text-right`}>
+                            <dt className={`${cuteFont.className} text-[40px] font-bold leading-none tracking-wider text-(--color-neutral-gray-blue) text-right`}>
                                 {feature.name}
                             </dt>
                             <dd className="text-base text-(--color-neutral-gray-blue) text-right">

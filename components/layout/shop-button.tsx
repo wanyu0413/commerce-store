@@ -79,7 +79,7 @@ export default function ShopButton() {
       </div>
       <Link
         href="/search"
-        className={`${cuteFont.className} text-[24px] neumorphic-surface neumorphic-surface--light btn-primary-lift relative z-10 inline-block uppercase`}
+        className={`${cuteFont.className} text-[24px] tracking-wider neumorphic-surface neumorphic-surface--light btn-primary-lift relative z-10 inline-block uppercase`}
       >
         Shop the Collection
       </Link>

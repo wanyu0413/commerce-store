@@ -23,7 +23,7 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-const LABEL_CLASS = `${cuteFont.className} text-[24px] text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
+const LABEL_CLASS = `${cuteFont.className} text-[24px] tracking-wider text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
 const ICON_ONLY_CLASS =
   "text-current transition-colors duration-300 ease-in-out hover:text-(--color-campfire)";
 
@@ -97,7 +97,7 @@ export default function CartModal({
           >
             <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-[2px] border-(--color-campfire) bg-white/50 p-6  text-(--color-midnight-ocean) backdrop-blur-xl md:w-[390px]">
               <div className="flex items-center justify-between">
-                <p className={`${cuteFont.className} text-[32px] font-semibold text-(--color-midnight-ocean)`}>My Cart</p>
+                <p className={`${cuteFont.className} text-[32px] font-semibold tracking-wider text-(--color-midnight-ocean)`}>My Cart</p>
                 <button aria-label="Close cart" onClick={closeCart}>
                   <CloseCart />
                 </button>

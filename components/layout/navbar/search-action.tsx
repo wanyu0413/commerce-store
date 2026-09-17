@@ -5,7 +5,7 @@ import { cuteFont } from "lib/fonts";
 import Form from "next/form";
 import { useSearchParams } from "next/navigation";
 
-const ACTION_CLASS = `${cuteFont.className} text-[24px] text-current transition-colors duration-300 ease-in-out group-hover:text-(--color-campfire) group-focus-within:text-(--color-campfire)`;
+const ACTION_CLASS = `${cuteFont.className} text-[24px] tracking-wider text-current transition-colors duration-300 ease-in-out group-hover:text-(--color-campfire) group-focus-within:text-(--color-campfire)`;
 
 // Expands into a real input on hover/focus-within — pure CSS, no state.
 export default function SearchAction() {
@@ -28,7 +28,7 @@ export default function SearchAction() {
           placeholder="Search for products..."
           autoComplete="off"
           defaultValue={searchParams?.get("q") || ""}
-          className={`search-action-input pointer-events-none absolute inset-0 w-full border-0 border-b border-(--color-campfire) bg-transparent text-xl text-(--color-campfire) opacity-0 outline-none placeholder:text-current/60 transition-opacity duration-200 ease-in-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${cuteFont.className}`}
+          className={`search-action-input pointer-events-none absolute inset-0 w-full border-0 border-b border-(--color-campfire) bg-transparent text-xl tracking-wider text-(--color-campfire) opacity-0 outline-none placeholder:text-current/60 transition-opacity duration-200 ease-in-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${cuteFont.className}`}
         />
       </div>
     </Form>
