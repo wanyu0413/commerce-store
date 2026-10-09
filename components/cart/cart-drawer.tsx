@@ -212,7 +212,7 @@ export default function CartDrawer() {
 
 function CloseCart({ className }: { className?: string }) {
   return (
-    <div className="neumorphic-surface relative flex h-11 w-11 items-center justify-center rounded-full text-(--color-neutral-gray-blue) transition-colors hover:text-(--color-campfire)">
+    <div className="neumorphic-surface rail-icon-chip relative h-11 w-11 text-(--color-neutral-gray-blue) hover:text-(--color-campfire)">
       <XMarkIcon
         className={clsx(
           "h-6 transition-all ease-in-out hover:scale-110",
