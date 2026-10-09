@@ -10,8 +10,11 @@ import React, {
   createContext,
   use,
   useContext,
+  useEffect,
   useMemo,
   useOptimistic,
+  useRef,
+  useState,
 } from "react";
 
 type UpdateType = "plus" | "minus" | "delete";
@@ -28,6 +31,20 @@ type CartAction =
 
 type CartContextType = {
   cartPromise: Promise<Cart | undefined>;
+  // A plain counter bumped only on a genuine "add to cart", shared via
+  // context since AddToCart (product pages) and CartModal (the nav) are
+  // separate component trees — see useCart's addCartItem below.
+  addedTick: number;
+  bumpAddedTick: () => void;
+  // The drawer's open state lives here (not in CartModal) because CartModal
+  // itself is instantiated twice — once for the mobile nav bar, once for the
+  // desktop nav — and only one is ever visible (the other CSS-hidden), but
+  // both are still live React instances. Keeping separate local isOpen state
+  // in each meant both independently opened their own <Dialog>, stacking two
+  // real drawers in the DOM ("a second panel").
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -197,8 +214,36 @@ export function CartProvider({
   children: React.ReactNode;
   cartPromise: Promise<Cart | undefined>;
 }) {
+  const [addedTick, setAddedTick] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const addedTickRef = useRef(addedTick);
+
+  const bumpAddedTick = () => setAddedTick((tick) => tick + 1);
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+
+  // Auto-open only on a genuine "add to cart" (bumpAddedTick), never on an
+  // in-drawer quantity adjustment — otherwise the stepper's optimistic-vs-
+  // server-action reconciliation can reopen the drawer right after the user
+  // explicitly closes it. Lives here (once) rather than in CartModal (twice).
+  useEffect(() => {
+    if (addedTick !== addedTickRef.current) {
+      addedTickRef.current = addedTick;
+      setIsCartOpen(true);
+    }
+  }, [addedTick]);
+
   return (
-    <CartContext.Provider value={{ cartPromise }}>
+    <CartContext.Provider
+      value={{
+        cartPromise,
+        addedTick,
+        bumpAddedTick,
+        isCartOpen,
+        openCart,
+        closeCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
@@ -215,6 +260,8 @@ export function useCart() {
     initialCart,
     cartReducer,
   );
+  const { addedTick, bumpAddedTick, isCartOpen, openCart, closeCart } =
+    context;
 
   const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
     updateOptimisticCart({
@@ -225,6 +272,7 @@ export function useCart() {
 
   const addCartItem = (variant: ProductVariant, product: Product) => {
     updateOptimisticCart({ type: "ADD_ITEM", payload: { variant, product } });
+    bumpAddedTick();
   };
 
   return useMemo(
@@ -232,7 +280,11 @@ export function useCart() {
       cart: optimisticCart,
       updateCartItem,
       addCartItem,
+      addedTick,
+      isCartOpen,
+      openCart,
+      closeCart,
     }),
-    [optimisticCart],
+    [optimisticCart, addedTick, isCartOpen],
   );
 }

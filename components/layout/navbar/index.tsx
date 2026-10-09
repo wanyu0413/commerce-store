@@ -1,3 +1,4 @@
+import CartDrawer from "components/cart/cart-drawer";
 import { getMenu } from "lib/shopify";
 import MobileNavBar from "./mobile-nav-bar";
 import NavItems from "./nav-items";
@@ -9,6 +10,7 @@ export async function Navbar() {
     <nav className="fixed inset-x-0 top-0 z-20 flex items-center justify-between bg-transparent p-2 md:px-8">
       <MobileNavBar menu={menu} />
       <NavItems menu={menu} />
+      <CartDrawer />
     </nav>
   );
 }
