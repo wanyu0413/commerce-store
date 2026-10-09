@@ -191,7 +191,7 @@ export default function CartModal({
                                     item.cost.totalAmount.currencyCode
                                   }
                                 />
-                                <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-(--color-neutral-gray-blue)">
+                                <div className="neumorphic-surface ml-auto flex h-9 flex-row items-center rounded-full">
                                   <EditItemQuantityButton
                                     item={item}
                                     type="minus"
@@ -251,7 +251,7 @@ export default function CartModal({
 
 function CloseCart({ className }: { className?: string }) {
   return (
-    <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-(--color-neutral-gray-blue) text-(--color-neutral-gray-blue) transition-colors">
+    <div className="neumorphic-surface relative flex h-11 w-11 items-center justify-center rounded-full text-(--color-neutral-gray-blue) transition-colors hover:text-(--color-campfire)">
       <XMarkIcon
         className={clsx(
           "h-6 transition-all ease-in-out hover:scale-110",
@@ -283,7 +283,7 @@ function CheckoutButton() {
       disabled={pending}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="btn-primary-lift relative flex w-full items-center justify-center gap-3 px-[20px] py-[12px] text-white hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+      className="neumorphic-surface btn-primary-lift relative flex w-full items-center justify-center gap-3 px-[20px] py-[12px] text-(--color-neutral-gray-blue) hover:text-(--color-campfire) disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? (
         <LoadingDots className="bg-white" />
@@ -297,9 +297,7 @@ function CheckoutButton() {
           <div className="absolute right-[10%] top-1/2 aspect-[579/348] w-[120px] -translate-y-[70%]">
             <DogMask
               url={maskUrl}
-              color={
-                isHovered ? "var(--color-midnight-ocean)" : "var(--color-campfire)"
-              }
+              color={isHovered ? "var(--color-neutral-gray-blue)" : "var(--color-campfire)"}
               className="transition-colors duration-300 ease-in-out"
             />
           </div>

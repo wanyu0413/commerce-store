@@ -90,13 +90,13 @@ function LiveSubmitButton() {
       aria-label="Add to cart"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="btn-primary-lift relative w-full flex items-center justify-center gap-3 py-[12px] px-[20px] text-white hover:text-white"
+      className="neumorphic-surface btn-primary-lift relative w-full flex items-center justify-center gap-3 py-[12px] px-[20px] text-(--color-neutral-gray-blue) hover:text-(--color-campfire)"
     >
       <span className={`${cuteFont.className} z-10 text-[24px] uppercase tracking-wider`}>
         Add To Cart
       </span>
       <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">
-        <DogMask url={maskUrl} color={isHovered ? "var(--color-midnight-ocean)" : "var(--color-campfire)"} className="transition-colors duration-300 ease-in-out" />
+        <DogMask url={maskUrl} color={isHovered ? "var(--color-neutral-gray-blue)" : "var(--color-campfire)"} className="transition-colors duration-300 ease-in-out" />
       </div>
     </button>
   );
