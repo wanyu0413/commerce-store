@@ -1,36 +1,66 @@
 "use client";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { cuteFont } from "lib/fonts";
 import Form from "next/form";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-const ACTION_CLASS = `${cuteFont.className} text-[24px] tracking-wider text-current transition-colors duration-300 ease-in-out group-hover:text-(--color-campfire) group-focus-within:text-(--color-campfire)`;
-
-// Expands into a real input on hover/focus-within — pure CSS, no state.
-export default function SearchAction() {
+// Drops a search field below the nav line instead of expanding inline, so
+// the evenly spaced nav ticks never shift.
+export default function SearchAction({ className }: { className?: string }) {
   const searchParams = useSearchParams();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    inputRef.current?.focus();
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
-    <Form action="/search" className="group flex items-center gap-2">
-      <MagnifyingGlassIcon className={`h-5 w-5 shrink-0 ${ACTION_CLASS}`} />
-      <div className="relative h-8 w-[50px] transition-[width] duration-300 ease-in-out group-hover:w-56 group-focus-within:w-56">
-        <span
-          aria-hidden="true"
-          className={`absolute inset-y-0 left-0 flex items-center whitespace-nowrap opacity-100 transition-opacity duration-200 ease-in-out group-hover:opacity-0 group-focus-within:opacity-0 ${ACTION_CLASS}`}
-        >
-          Search
-        </span>
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className={`${className ?? ""} ${open ? "text-(--color-campfire)" : ""}`}
+      >
+        Search
+      </button>
+      <Form
+        action="/search"
+        onSubmit={() => setOpen(false)}
+        inert={!open}
+        className={`absolute left-1/2 top-full mt-3 w-72 -translate-x-1/2 transition-[opacity,translate] duration-200 ease-in-out ${
+          open
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
         <input
+          ref={inputRef}
           key={searchParams?.get("q")}
           type="text"
           name="q"
           placeholder="Search for products..."
           autoComplete="off"
           defaultValue={searchParams?.get("q") || ""}
-          className={`search-action-input pointer-events-none absolute inset-0 w-full border-0 border-b border-(--color-campfire) bg-transparent text-xl tracking-wider text-(--color-campfire) opacity-0 outline-none placeholder:text-current/60 transition-opacity duration-200 ease-in-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 ${cuteFont.className}`}
+          className={`search-action-input w-full border-0 border-b border-(--color-campfire) bg-transparent py-1 text-center text-xl tracking-wider text-(--color-campfire) outline-none placeholder:text-current/60 ${cuteFont.className}`}
         />
-      </div>
-    </Form>
+      </Form>
+    </div>
   );
 }

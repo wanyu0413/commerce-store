@@ -1,17 +1,22 @@
 "use client";
 
+import { useCart } from "components/cart/cart-context";
 import CartModal from "components/cart/modal";
 import LogoSquare from "components/logo-square";
 import { cuteFont } from "lib/fonts";
 import { Menu } from "lib/shopify/types";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { iconForMenuItem } from "./menu-icon";
-import NavLink from "./nav-link";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import SearchAction from "./search-action";
 
-const ITEM_CLASS = `${cuteFont.className} flex items-center gap-2 text-[24px] tracking-wider hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
+const ITEM_CLASS = `${cuteFont.className} whitespace-nowrap text-[24px] tracking-wider hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
+
+const SECTION_LINKS: Menu[] = [
+  { title: "Features", path: "/#features" },
+  { title: "Products", path: "/#products" },
+];
 
 export default function NavItems({ menu }: { menu: Menu[] }) {
   const pathname = usePathname();
@@ -46,36 +51,74 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
+  const links = [...SECTION_LINKS, ...menu];
+  const items: ReactNode[] = [
+    ...links.map((item) => (
+      <Link key={item.title} href={item.path} prefetch={true} className={ITEM_CLASS}>
+        {item.title}
+      </Link>
+    )),
+    <SearchAction key="search" className={ITEM_CLASS} />,
+    <CartModal key="cart" label="Cart" />,
+  ];
+
+  // The dog rests on the current page's item and slides to whichever is hovered.
+  const restIndex = Math.max(
+    0,
+    links.findIndex((item) => item.path.split("#")[0] === pathname),
+  );
+  const { isCartOpen } = useCart();
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const dogIndex = isCartOpen ? items.length - 1 : (hoverIndex ?? restIndex);
+  const prevIndex = useRef(dogIndex);
+  const [facingLeft, setFacingLeft] = useState(false);
+
+  useEffect(() => {
+    if (dogIndex !== prevIndex.current) {
+      setFacingLeft(dogIndex < prevIndex.current);
+      prevIndex.current = dogIndex;
+    }
+  }, [dogIndex]);
+
   const colorClass = overHero
     ? "text-(--color-midnight-ocean)"
     : "text-(--color-neutral-gray-blue)";
 
   return (
-    <div
-      className={`hidden md:grid w-full grid-cols-[1fr_auto_1fr] items-center ${colorClass}`}
-    >
-      <div className="flex items-center gap-4 justify-self-start">
-        {menu.map((item: Menu) => {
-          const Icon = iconForMenuItem(item.title);
-          return (
-            <NavLink key={item.title} href={item.path} className={ITEM_CLASS}>
-              <Icon className="h-5 w-5 shrink-0" />
-              {item.title}
-            </NavLink>
-          );
-        })}
-      </div>
-      <Link
-        href="/"
-        prefetch={true}
-        aria-label="Home"
-        className="flex items-center justify-self-center"
-      >
+    <div className={`hidden md:flex w-full items-start gap-8 ${colorClass}`}>
+      <Link href="/" prefetch={true} aria-label="Home" className="flex items-center">
         <LogoSquare />
       </Link>
-      <div className="flex items-center gap-4 justify-self-end">
-        <SearchAction />
-        <CartModal iconClassName="h-5 w-5" label="Cart" />
+      <div
+        className="relative mt-10 flex flex-1 border-t border-(--color-campfire)"
+        onMouseLeave={() => setHoverIndex(null)}
+      >
+        <Image
+          src="/dachshund.svg"
+          alt=""
+          aria-hidden="true"
+          width={56}
+          height={42}
+          className="pointer-events-none absolute bottom-full mb-[-2px] h-[42px] w-14 transition-[left] duration-500 ease-in-out"
+          style={{
+            left: `${((dogIndex + 0.5) / items.length) * 100}%`,
+            // Tilted back on its haunches, pivoting at the butt so it stays on the line.
+            transform: `translateX(-50%) scaleX(${facingLeft ? -1 : 1}) rotate(-6deg)`,
+            transformOrigin: `${facingLeft ? 65 : 35}% 100%`,
+          }}
+        />
+        {items.map((item, i) => (
+          <div
+            key={i}
+            className="flex min-w-0 flex-1 flex-col items-center"
+            onMouseEnter={() => setHoverIndex(i)}
+            onFocus={() => setHoverIndex(i)}
+            onBlur={() => setHoverIndex(null)}
+          >
+            <span aria-hidden="true" className="h-4 w-px bg-(--color-campfire)" />
+            {item}
+          </div>
+        ))}
       </div>
     </div>
   );

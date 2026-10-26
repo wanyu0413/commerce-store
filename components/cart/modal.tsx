@@ -22,16 +22,26 @@ export default function CartModal({
 } = {}) {
   const { cart, openCart } = useCart();
 
+  if (label) {
+    return (
+      <button
+        aria-label="Open cart"
+        onClick={openCart}
+        className={`relative ${LABEL_CLASS}`}
+      >
+        {label}
+        {cart?.totalQuantity ? (
+          <span className="absolute -right-4 top-0 h-4 min-w-4 rounded-sm bg-(--color-campfire) px-0.5 font-sans text-[11px] font-medium leading-4 text-white">
+            {cart.totalQuantity}
+          </span>
+        ) : null}
+      </button>
+    );
+  }
+
   return (
-    <button
-      aria-label="Open cart"
-      onClick={openCart}
-      className={
-        label ? `flex items-center gap-2 ${LABEL_CLASS}` : iconOnlyClassName
-      }
-    >
+    <button aria-label="Open cart" onClick={openCart} className={iconOnlyClassName}>
       <OpenCart className={iconClassName} quantity={cart?.totalQuantity} />
-      {label}
     </button>
   );
 }

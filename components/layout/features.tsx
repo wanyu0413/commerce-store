@@ -22,7 +22,7 @@ const features = [
 
 export function Features() {
     return (
-        <section className="bg-[transparent] py-24 sm:py-32">
+        <section id="features" className="scroll-mt-28 bg-[transparent] py-24 sm:py-32">
             <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
                 <div className="mx-auto max-w-2xl text-center">
                     <ScrollFillHeading
