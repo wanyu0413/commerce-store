@@ -2,15 +2,12 @@
 
 import { ReactNode, useRef, useState } from "react";
 
-// Mouse position relative to card center drives a tilt (--rx/--ry) plus an
-// opposite-direction background parallax (--tx/--ty) — see .tilt-card* in
-// globals.css for the actual transform/transition rules this feeds.
+// Mouse position relative to card center drives a tilt (--rx/--ry) — see
+// .tilt-card* in globals.css for the actual transform/transition rules this feeds.
 export default function TiltCard({
-  image,
   className,
   children,
 }: {
-  image: string;
   className?: string;
   children: ReactNode;
 }) {
@@ -46,16 +43,10 @@ export default function TiltCard({
         {
           "--rx": `${pos.y * -30}deg`,
           "--ry": `${pos.x * 30}deg`,
-          "--tx": `${pos.x * -40}px`,
-          "--ty": `${pos.y * -40}px`,
         } as React.CSSProperties
       }
     >
       <div className={`tilt-card ${className ?? ""}`}>
-        <div
-          className="tilt-card-bg"
-          style={{ backgroundImage: `url(${image})` }}
-        />
         <div className="tilt-card-info">{children}</div>
       </div>
     </div>

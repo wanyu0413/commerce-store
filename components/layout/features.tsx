@@ -6,17 +6,14 @@ const features = [
     {
         name: 'Spine Support',
         description: 'Rigid support integrated into the top panel to help prevent IVDD issues.',
-        image: '/spine_support.webp',
     },
     {
         name: 'Deep Chest Fit',
         description: 'Specifically tailored panels for the unique deep-chest dachshund ribcage.',
-        image: '/deep_chest_fit.webp',
     },
     {
         name: 'No-Choke Design',
         description: 'Lower neck cut-out distributes pressure away from the sensitive trachea.',
-        image: '/no-choke_design.webp',
     },
 ];
 
@@ -37,13 +34,12 @@ export function Features() {
                     {features.map((feature) => (
                         <TiltCard
                             key={feature.name}
-                            image={feature.image}
-                            className="flex flex-col aspect-[378/222] bg-(--color-midnight-ocean) rounded-[25px] p-10"
+                            className="flex flex-col aspect-[378/222] bg-black/25 rounded-[40px] p-10"
                         >
-                            <dt className={`${cuteFont.className} text-[40px] font-bold leading-none tracking-wider text-(--color-neutral-gray-blue) text-right`}>
+                            <dt className={`${cuteFont.className} text-[40px] font-bold leading-none tracking-wider text-(--color-neutral-gray-blue)`}>
                                 {feature.name}
                             </dt>
-                            <dd className="text-base text-(--color-neutral-gray-blue) text-right">
+                            <dd className="text-base text-(--color-neutral-gray-blue)">
                                 {feature.description}
                             </dd>
                         </TiltCard>
