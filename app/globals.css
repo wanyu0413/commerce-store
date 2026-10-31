@@ -10,6 +10,17 @@
   --font-display: "Epilogue", sans-serif;
   --font-sans: var(--font-source-sans-3), ui-sans-serif, system-ui, sans-serif;
   --radius-xl: 3rem;
+
+  /* Nav item swinging from its tick like a hanging sign, settling to rest. */
+  --animate-nav-swing: nav-swing 0.9s ease-out;
+  @keyframes nav-swing {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(8deg); }
+    40% { transform: rotate(-6deg); }
+    60% { transform: rotate(3.5deg); }
+    80% { transform: rotate(-1.5deg); }
+    100% { transform: rotate(0deg); }
+  }
 }
 
 body {

@@ -110,13 +110,15 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
         {items.map((item, i) => (
           <div
             key={i}
-            className="flex min-w-0 flex-1 flex-col items-center"
+            className="group flex min-w-0 flex-1 justify-center"
             onMouseEnter={() => setHoverIndex(i)}
             onFocus={() => setHoverIndex(i)}
             onBlur={() => setHoverIndex(null)}
           >
-            <span aria-hidden="true" className="h-4 w-px bg-(--color-campfire)" />
-            {item}
+            <div className="flex origin-top flex-col items-center motion-safe:group-hover:animate-nav-swing">
+              <span aria-hidden="true" className="h-4 w-px bg-(--color-campfire)" />
+              {item}
+            </div>
           </div>
         ))}
       </div>
