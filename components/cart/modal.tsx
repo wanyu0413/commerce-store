@@ -1,10 +1,10 @@
 "use client";
 
-import { cuteFont } from "lib/fonts";
+import { slackey } from "lib/fonts";
 import { useCart } from "./cart-context";
 import OpenCart from "./open-cart";
 
-const LABEL_CLASS = `${cuteFont.className} text-[24px] tracking-wider text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
+const LABEL_CLASS = `${slackey.className} text-[16px] tracking-wide text-current hover:text-(--color-campfire) transition-all duration-300 ease-in-out`;
 const ICON_ONLY_CLASS =
   "text-current transition-colors duration-300 ease-in-out hover:text-(--color-campfire)";
 
@@ -31,7 +31,7 @@ export default function CartModal({
       >
         {label}
         {cart?.totalQuantity ? (
-          <span className="absolute -right-4 top-0 h-4 min-w-4 rounded-sm bg-(--color-campfire) px-0.5 font-sans text-[11px] font-medium leading-4 text-white">
+          <span className="absolute -right-5 -top-2 h-4 min-w-4 rounded-sm bg-(--color-campfire) px-0.5 font-sans text-[11px] font-medium leading-4 text-white">
             {cart.totalQuantity}
           </span>
         ) : null}

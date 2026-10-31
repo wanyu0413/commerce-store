@@ -6,7 +6,7 @@ import clsx from "clsx";
 import LoadingDots from "components/loading-dots";
 import Price from "components/price";
 import { DEFAULT_OPTION } from "lib/constants";
-import { cuteFont } from "lib/fonts";
+import { slackey } from "lib/fonts";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,7 +59,7 @@ export default function CartDrawer() {
         >
           <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-[2px] border-(--color-campfire) p-6  text-(--color-neutral-gray-blue) backdrop-blur-xl md:w-[390px]">
             <div className="flex items-center justify-between">
-              <p className={`${cuteFont.className} text-[32px] font-semibold tracking-wider text-(--color-campfire)`}>My Cart</p>
+              <p className={`${slackey.className} text-[22px] tracking-wide text-(--color-campfire)`}>My Cart</p>
               <button aria-label="Close cart" onClick={closeCart}>
                 <CloseCart />
               </button>
@@ -251,7 +251,7 @@ function CheckoutButton() {
       ) : (
         <>
           <span
-            className={`${cuteFont.className} z-10 text-[24px] uppercase tracking-wider`}
+            className={`${slackey.className} z-10 text-[16px] uppercase tracking-wide`}
           >
             Proceed to Checkout
           </span>

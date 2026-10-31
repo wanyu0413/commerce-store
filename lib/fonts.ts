@@ -1,7 +1,14 @@
-import { Cute_Font, Josefin_Sans, Montserrat } from "next/font/google";
+import { Cute_Font, Josefin_Sans, Montserrat, Slackey } from "next/font/google";
 
-// Site-name display font: https://fonts.google.com/specimen/Cute+Font
+// Site-name wordmark (footer): https://fonts.google.com/specimen/Cute+Font
 export const cuteFont = Cute_Font({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Display font for headings, nav and buttons: https://fonts.google.com/specimen/Slackey
+export const slackey = Slackey({
   weight: "400",
   subsets: ["latin"],
   display: "swap",

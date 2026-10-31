@@ -3,7 +3,7 @@
 import { useCart } from "components/cart/cart-context";
 import CartModal from "components/cart/modal";
 import LogoSquare from "components/logo-square";
-import { cuteFont } from "lib/fonts";
+import { slackey } from "lib/fonts";
 import { Menu } from "lib/shopify/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import SearchAction from "./search-action";
 
-const ITEM_CLASS = `${cuteFont.className} whitespace-nowrap text-[24px] tracking-wider hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
+const ITEM_CLASS = `${slackey.className} whitespace-nowrap text-[16px] tracking-wide hover:text-(--color-campfire) transition-colors duration-300 ease-in-out`;
 
 const SECTION_LINKS: Menu[] = [
   { title: "Features", path: "/#features" },

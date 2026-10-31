@@ -1,6 +1,7 @@
-import { cuteFont } from 'lib/fonts';
+import { josefinSans, slackey } from 'lib/fonts';
 import ScrollFillHeading from './scroll-fill-heading';
 import TiltCard from './tilt-card';
+import WiggleWords from './wiggle-words';
 
 const features = [
     {
@@ -21,22 +22,29 @@ export function Features() {
     return (
         <section id="features" className="scroll-mt-28 bg-[transparent] py-24 sm:py-32">
             <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-                <div className="mx-auto max-w-2xl text-center">
-                    <ScrollFillHeading
-                        text="Designed for Dachshund's Health"
-                        className={`${cuteFont.className} text-[100px] leading-none tracking-wider`}
-                    />
-                    <p className="mt-4 text-lg leading-8 text-(--color-neutral-gray-blue)">
-                        Every detail crafted to protect your dog's unique anatomy and prevent long-term back issues.
+                <div className="mx-auto text-center">
+                    <p className="mb-3 text-[clamp(15px,1.4vw,22px)] font-medium uppercase tracking-[4px] text-(--color-campfire)">
+                        Why LONGLOAF
                     </p>
+                    <div className="relative inline-block">
+                        <ScrollFillHeading
+                            text="WHAT HAVE WE DONE"
+                            waveWords={3}
+                            className={`${josefinSans.className} text-[clamp(40px,4.8vw,72px)] leading-[1.3] [--scroll-fill-color:var(--color-neutral-gray-blue)]`}
+                        />
+                        {/* Subtitle tucked over the title's bottom-right corner. */}
+                        <p className={`${slackey.className} absolute right-0 bottom-0 translate-x-[20%] translate-y-[45%] -rotate-6 whitespace-nowrap text-[clamp(20px,2.4vw,36px)] leading-none text-(--color-campfire)`}>
+                            <WiggleWords text="for long bodies' health" />
+                        </p>
+                    </div>
                 </div>
-                <dl className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+                <dl className="mt-[clamp(44px,5vw,72px)] grid grid-cols-1 gap-8 md:grid-cols-3">
                     {features.map((feature) => (
                         <TiltCard
                             key={feature.name}
                             className="flex flex-col aspect-[378/222] bg-black/25 rounded-[40px] p-10"
                         >
-                            <dt className={`${cuteFont.className} text-[40px] font-bold leading-none tracking-wider text-(--color-neutral-gray-blue)`}>
+                            <dt className={`${slackey.className} text-[26px] leading-none tracking-wide text-(--color-neutral-gray-blue)`}>
                                 {feature.name}
                             </dt>
                             <dd className="text-base text-(--color-neutral-gray-blue)">

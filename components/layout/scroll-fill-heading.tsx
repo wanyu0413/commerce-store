@@ -7,9 +7,12 @@ import { Fragment, useEffect, useRef } from "react";
 export default function ScrollFillHeading({
   text,
   className,
+  waveWords,
 }: {
   text: string;
   className?: string;
+  // Limits each line's wave to its first N words; defaults to the whole line.
+  waveWords?: number;
 }) {
   const ref = useRef<HTMLHeadingElement>(null);
 
@@ -46,21 +49,39 @@ export default function ScrollFillHeading({
     };
   }, []);
 
-  const words = text.split(" ");
+  // "\n" in text starts a new line; each line gets its own wave.
+  const lines = text.split("\n").map((line) => line.split(" "));
+  let wordIndex = 0;
 
-  return (
-    <h2 ref={ref} className={`scroll-fill-heading ${className ?? ""}`}>
-      {words.map((word, i) => (
+  const renderWords = (words: string[]) =>
+    words.map((word, i) => {
+      const reverse = wordIndex++ % 2 === 1;
+      return (
         <Fragment key={i}>
+          {i > 0 && " "}
           <span
             data-word={word}
-            className={`scroll-fill-word ${i % 2 === 1 ? "scroll-fill-word--reverse" : ""}`}
+            className={`scroll-fill-word ${reverse ? "scroll-fill-word--reverse" : ""}`}
           >
             {word}
           </span>
-          {i < words.length - 1 ? " " : ""}
         </Fragment>
-      ))}
+      );
+    });
+
+  return (
+    <h2 ref={ref} className={`scroll-fill-heading ${className ?? ""}`}>
+      {lines.map((words, l) => {
+        const waved = waveWords ? words.slice(0, waveWords) : words;
+        const rest = words.slice(waved.length);
+        return (
+          <Fragment key={l}>
+            {l > 0 && <br />}
+            <span className="scroll-fill-line">{renderWords(waved)}</span>
+            {rest.length > 0 && <> {renderWords(rest)}</>}
+          </Fragment>
+        );
+      })}
     </h2>
   );
 }

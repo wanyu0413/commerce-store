@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { cuteFont } from "lib/fonts";
+import { slackey } from "lib/fonts";
 import { Menu } from "lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,8 +20,8 @@ export function FooterMenuItem({ item }: { item: Menu }) {
       <Link
         href={item.path}
         className={clsx(
-          cuteFont.className,
-          "text-[24px] tracking-wider text-(--color-neutral-gray-blue) underline-offset-4 hover:text-(--color-campfire) transition-all duration-300 ease-in-out hover:underline",
+          slackey.className,
+          "text-[16px] tracking-wide text-(--color-neutral-gray-blue) underline-offset-4 hover:text-(--color-campfire) transition-all duration-300 ease-in-out hover:underline",
           {
             "text-(--color-campfire)": active,
           }

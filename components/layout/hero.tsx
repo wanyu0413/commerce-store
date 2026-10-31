@@ -2,14 +2,11 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cuteFont, josefinSans } from "lib/fonts";
+import { slackey, josefinSans } from "lib/fonts";
 import Image from "next/image";
-import { Fragment, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ShopButton from './shop-button';
-
-const WIGGLE_WORDS = ["It's", "the", "end..."];
-// Offsets so the words never jitter in sync.
-const WIGGLE_DELAYS = ["0s", "-0.15s", "-0.075s"];
+import WiggleWords from './wiggle-words';
 
 export default function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -49,18 +46,8 @@ export default function Hero() {
             <div className="grid h-full items-center gap-12 px-6 pt-12 pb-24 md:grid-cols-[minmax(0,9fr)_minmax(0,11fr)] md:gap-x-[52px] md:px-[max(52px,calc((100vw-1600px)/2))] md:py-0">
                 <div ref={contentRef} className="@container relative z-10 flex flex-col items-start">
                     <h1 className="text-(--color-midnight-ocean)">
-                        <span className={`${cuteFont.className} block whitespace-nowrap text-[min(27cqw,170px)] leading-none tracking-tight text-(--color-campfire)`}>
-                            {WIGGLE_WORDS.map((word, i) => (
-                                <Fragment key={word}>
-                                    {i > 0 && " "}
-                                    <span
-                                        className="inline-block motion-safe:animate-wiggle"
-                                        style={{ animationDelay: WIGGLE_DELAYS[i % WIGGLE_DELAYS.length] }}
-                                    >
-                                        {word}
-                                    </span>
-                                </Fragment>
-                            ))}
+                        <span className={`${slackey.className} block whitespace-nowrap text-[min(13cqw,110px)] leading-none tracking-tight text-(--color-campfire)`}>
+                            <WiggleWords text="It's the end..." />
                         </span>
                         <span className={`${josefinSans.className} mt-4 block text-[32px] uppercase leading-[1.05] md:text-[48px]`}>
                             Of bad harnesses for long bodies.
