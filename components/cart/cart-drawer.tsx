@@ -251,7 +251,7 @@ function CheckoutButton() {
       ) : (
         <>
           <span
-            className={`${slackey.className} z-10 text-[16px] uppercase tracking-wide`}
+            className="font-sans z-10 text-[16px] uppercase tracking-wider"
           >
             Proceed to Checkout
           </span>

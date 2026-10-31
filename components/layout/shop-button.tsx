@@ -1,7 +1,6 @@
 "use client";
 
 import gsap from "gsap";
-import { josefinSans } from "lib/fonts";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 
@@ -79,7 +78,7 @@ export default function ShopButton() {
       </div>
       <Link
         href="/search"
-        className={`${josefinSans.className} text-[18px] tracking-wider neumorphic-surface neumorphic-surface--light btn-primary-lift relative z-10 inline-block uppercase`}
+        className="font-sans text-[16px] tracking-wider neumorphic-surface neumorphic-surface--light btn-primary-lift relative z-10 inline-block uppercase"
       >
         Shop the Collection
       </Link>

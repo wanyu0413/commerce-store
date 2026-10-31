@@ -1,7 +1,6 @@
 "use client";
 
 import { addItem } from "components/cart/actions";
-import { slackey } from "lib/fonts";
 import { Product, ProductVariant } from "lib/shopify/types";
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
@@ -29,7 +28,7 @@ function DogMaskButton({
       {...handlers}
       className="relative w-full flex items-center justify-center gap-3 bg-neutral-800 text-neutral-400 py-[12px] px-[20px] rounded-[9999px] font-bold cursor-not-allowed opacity-50"
     >
-      <span className={`${slackey.className} text-[16px] uppercase tracking-wide`}>
+      <span className="font-sans text-[16px] uppercase tracking-wider">
         {label}
       </span>
       <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">
@@ -92,7 +91,7 @@ function LiveSubmitButton() {
       onMouseLeave={() => setIsHovered(false)}
       className="neumorphic-surface btn-primary-lift relative w-full flex items-center justify-center gap-3 py-[12px] px-[20px] text-(--color-neutral-gray-blue) hover:text-(--color-campfire)"
     >
-      <span className={`${slackey.className} z-10 text-[16px] uppercase tracking-wide`}>
+      <span className="font-sans z-10 text-[16px] uppercase tracking-wider">
         Add To Cart
       </span>
       <div className="absolute right-[10%] top-1/2 -translate-y-[70%] w-[120px] aspect-[579/348]">

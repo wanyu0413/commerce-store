@@ -107,7 +107,7 @@ button {
   /* Same neumorphic surface as the nav (see .neumorphic-surface below);
      always the light variant since it sits over the Hero photo. */
   .btn-primary-lift {
-    @apply inline-block px-[40px] py-[20px] rounded-[9999px] font-bold text-(--color-midnight-ocean);
+    @apply inline-block px-[40px] py-[20px] rounded-[9999px] text-(--color-midnight-ocean);
   }
 
   .btn-primary-lift:hover {
