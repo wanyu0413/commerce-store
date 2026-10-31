@@ -1,6 +1,5 @@
 "use client";
 
-import { slackey } from "lib/fonts";
 import Form from "next/form";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -58,7 +57,7 @@ export default function SearchAction({ className }: { className?: string }) {
           placeholder="Search for products..."
           autoComplete="off"
           defaultValue={searchParams?.get("q") || ""}
-          className={`search-action-input w-full border-0 border-b border-(--color-campfire) bg-transparent py-1 text-center text-base tracking-wide text-(--color-campfire) outline-none placeholder:text-current/60 ${slackey.className}`}
+          className="search-action-input w-full border-0 border-b border-(--color-campfire) bg-transparent py-1 text-center text-base tracking-wide text-(--color-campfire) outline-none placeholder:text-current/60 font-sans"
         />
       </Form>
     </div>

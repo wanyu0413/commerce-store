@@ -99,7 +99,10 @@ export default function NavItems({ menu }: { menu: Menu[] }) {
           aria-hidden="true"
           width={56}
           height={42}
-          className="pointer-events-none absolute bottom-full mb-[-2px] h-[42px] w-14 transition-[left] duration-500 ease-in-out"
+          className={`pointer-events-none absolute bottom-full mb-[-2px] h-[42px] w-14 transition-[left] ease-in-out ${
+            // Strolls back slowly to its resting spot once the mouse leaves the nav.
+            hoverIndex === null && !isCartOpen ? "duration-[1200ms]" : "duration-500"
+          }`}
           style={{
             left: `${((dogIndex + 0.5) / items.length) * 100}%`,
             // Tilted back on its haunches, pivoting at the butt so it stays on the line.
