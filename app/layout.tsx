@@ -1,7 +1,7 @@
 import { CartProvider } from "components/cart/cart-context";
 import { Navbar } from "components/layout/navbar";
 import { WelcomeToast } from "components/welcome-toast";
-import { sourceSans3 } from "lib/fonts";
+import { montserrat } from "lib/fonts";
 import { getCart } from "lib/shopify";
 import { baseUrl } from "lib/utils";
 import { ReactNode } from "react";
@@ -31,7 +31,7 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en" className={sourceSans3.variable}>
+    <html lang="en" className={montserrat.variable}>
       <body className="bg-(--color-midnight-ocean) text-white selection:bg-teal-300 selection:text-white" suppressHydrationWarning>
         <CartProvider cartPromise={cart}>
           <Navbar />

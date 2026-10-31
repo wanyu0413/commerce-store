@@ -8,10 +8,17 @@
   --color-background-light: #f7f6f6;
   --color-background-dark: #1d1515;
   --font-display: "Epilogue", sans-serif;
-  --font-sans: var(--font-source-sans-3), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --radius-xl: 3rem;
 
   /* Nav item swinging from its tick like a hanging sign, settling to rest. */
+  /* Stop-motion jitter: steps(2) snaps between the two poses instead of easing. */
+  --animate-wiggle: wiggle 0.3s steps(2) infinite;
+  @keyframes wiggle {
+    0% { rotate: 2deg; }
+    100% { rotate: -2deg; }
+  }
+
   --animate-nav-swing: nav-swing 0.9s ease-out;
   @keyframes nav-swing {
     0% { transform: rotate(0deg); }
@@ -89,6 +96,14 @@ button {
 }
 
 @layer components {
+
+  /* Tears the bottom edge of a section so the page behind shows through. */
+  .torn-edge-bottom {
+    --torn-height: 40px;
+    mask:
+      linear-gradient(#000 0 0) top / 100% calc(100% - var(--torn-height) + 1px) no-repeat,
+      url(/torn-edge.svg) bottom / 100% var(--torn-height) no-repeat;
+  }
 
   /* Same neumorphic surface as the nav (see .neumorphic-surface below);
      always the light variant since it sits over the Hero photo. */
@@ -226,11 +241,12 @@ button {
       background-color 0.3s ease-in-out;
   }
 
-  /* Light variant for when a surface still sits over the white Hero. */
+  /* Light variant for surfaces sitting over the gray-blue Hero: matches its
+     background so only the shadows define the shape. */
   .neumorphic-surface--light {
-    --shadow-dark: rgba(23, 40, 69, 0.18);
-    --shadow-light: rgba(255, 255, 255, 0.9);
-    --chip-bg: var(--color-background-light);
+    --shadow-dark: rgba(23, 40, 69, 0.3);
+    --shadow-light: rgba(255, 255, 255, 0.75);
+    --chip-bg: var(--color-neutral-gray-blue);
   }
 
   .rail-icon-chip {

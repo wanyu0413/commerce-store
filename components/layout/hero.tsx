@@ -2,18 +2,24 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { cuteFont, josefinSans } from "lib/fonts";
+import Image from "next/image";
+import { Fragment, useEffect, useRef } from "react";
 import ShopButton from './shop-button';
+
+const WIGGLE_WORDS = ["It's", "the", "end..."];
+// Offsets so the words never jitter in sync.
+const WIGGLE_DELAYS = ["0s", "-0.15s", "-0.075s"];
 
 export default function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
-    const bgRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
         const ctx = gsap.context(() => {
-            gsap.to(bgRef.current, {
+            gsap.to(imageRef.current, {
                 y: 80,
                 ease: "none",
                 scrollTrigger: {
@@ -38,17 +44,46 @@ export default function Hero() {
     }, []);
 
     return (
-        <section ref={sectionRef} data-hero-section className="relative -mt-20 w-full h-[800px] flex flex-col items-center justify-center overflow-hidden">
-            <div ref={bgRef} className="absolute -inset-y-40 inset-x-0 flex w-full">
-                <div className="relative flex-1 h-full bg-[url(/hero.png)] bg-center bg-cover">
+        <section ref={sectionRef} data-hero-section className="torn-edge-bottom relative -mt-20 w-full overflow-hidden bg-(--color-neutral-gray-blue) pt-20 md:h-[800px]">
+            {/* 52px gutters that grow to cap the content at 1600px on very wide screens. */}
+            <div className="grid h-full items-center gap-12 px-6 pt-12 pb-24 md:grid-cols-[minmax(0,9fr)_minmax(0,11fr)] md:gap-x-[52px] md:px-[max(52px,calc((100vw-1600px)/2))] md:py-0">
+                <div ref={contentRef} className="@container relative z-10 flex flex-col items-start">
+                    <h1 className="text-(--color-midnight-ocean)">
+                        <span className={`${cuteFont.className} block whitespace-nowrap text-[min(27cqw,170px)] leading-none tracking-tight text-(--color-campfire)`}>
+                            {WIGGLE_WORDS.map((word, i) => (
+                                <Fragment key={word}>
+                                    {i > 0 && " "}
+                                    <span
+                                        className="inline-block motion-safe:animate-wiggle"
+                                        style={{ animationDelay: WIGGLE_DELAYS[i % WIGGLE_DELAYS.length] }}
+                                    >
+                                        {word}
+                                    </span>
+                                </Fragment>
+                            ))}
+                        </span>
+                        <span className={`${josefinSans.className} mt-4 block text-[32px] uppercase leading-[1.05] md:text-[48px]`}>
+                            Of bad harnesses for long bodies.
+                        </span>
+                    </h1>
+                    <p className="mt-6 mb-14 max-w-lg text-lg text-(--color-midnight-ocean)/75">
+                        Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.
+                    </p>
+                    <ShopButton />
                 </div>
-            </div>
 
-            <div ref={contentRef} className="relative z-10 flex flex-col items-center px-4 text-center">
-                <p className="text-lg text-gray-600 drop-shadow-md mt-6 mb-14 max-w-lg">
-                    Premium harnesses designed specifically for the unique needs of Corgis and Dachshunds.
-                </p>
-                <ShopButton />
+                {/* Photo has an opaque off-white backdrop: brightness lifts it to pure
+                    white, then multiply lets the white take on the hero background. */}
+                <div ref={imageRef} className="relative aspect-[1.6] w-full mix-blend-multiply md:scale-115 [mask-image:linear-gradient(to_right,transparent,#000_18%,#000_85%,transparent)]">
+                    <Image
+                        src="/hero.png"
+                        alt="Two dachshunds wearing Snoopy denim harnesses"
+                        fill
+                        priority
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover brightness-[1.06]"
+                    />
+                </div>
             </div>
         </section>
     );
