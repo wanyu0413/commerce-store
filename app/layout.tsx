@@ -1,4 +1,5 @@
 import { CartProvider } from "components/cart/cart-context";
+import CursorPaw from "components/cursor-paw";
 import { Navbar } from "components/layout/navbar";
 import { WelcomeToast } from "components/welcome-toast";
 import { montserrat } from "lib/fonts";
@@ -40,6 +41,7 @@ export default async function RootLayout({
             <Toaster closeButton />
             <WelcomeToast />
           </main>
+          <CursorPaw />
         </CartProvider>
       </body>
     </html>
